@@ -33,17 +33,16 @@
             <!--タイトル-->
             <div class="title">
                 <h2>タイトル</h2>
-                <input type="text" name="post[title]" placeholder="タイトル">
+                <input type="text" name="post[title]" placeholder="タイトル" value="{{ old('post.title') }}"/>
+                <p class="title_error" style="color:red">{{ $errors->first('post.title') }}</p>
             </div>
             <!--本文-->
             <div class="body">
                 <h2>本文</h2>
-                <textarea name="post[body]" placeholder="ご自由におかきください。"></textarea>
+                <textarea name="post[body]" placeholder="ご自由におかきください。">{{ old('post.body') }}</textarea>
+                <p class="body_error" style="color:red">{{ $errors->first('post.body') }}</p>
             </div>
             <!--投稿するユーザー-->
-            <select name="post[user_id]">
-                <option value="{{ Auth::user()->id }}">{{ Auth::user()->name }}</option>
-            </select>
             <input type="submit" value="投稿する"/>
         </form>
         <div class="footer">
