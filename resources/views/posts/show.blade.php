@@ -8,16 +8,15 @@
     </head>
     <x-app-layout>
     <body>
+        <!--カテゴリー-->
+        <a fref="">{{ $post->category->name }}</a>
         <!--タイトル-->
         <h1 class="title">
             {{ $post->title }}
         </h1>
-        <!--カテゴリー-->
-        <a fref="">{{ $post->category->name }}</a>
         <!--本文-->
         <div class='content'>
            <div class="content_post">
-               <h3>本文</h3>
                <p>{{ $post->body }}</p>
            </div>
         </div>

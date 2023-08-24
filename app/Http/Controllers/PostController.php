@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\Difficulty;
 use App\Models\User;
+use App\Http\Requests\PostRequest;
 
 class PostController extends Controller
 {
@@ -30,9 +32,10 @@ class PostController extends Controller
             ]);
     }
     //投稿をDBに保存して投稿一覧へリダイレクト
-    public function store(Request $request, Post $post)
+    public function store(PostRequest $request, Post $post)
     {
         $input = $request['post'];
+        $post->user_id = Auth::id();
         $post->fill($input)->save();
         return redirect('/posts/' . $post->id);
     }
