@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
-    public function getPaginateByLimit(int $limit_count = 5)
+    public function getPaginateByLimit(int $limit_count = 10)
     {
         return $this::with('category')->orderBy('updated_at','DESC')->paginate($limit_count);
     }
@@ -34,5 +34,10 @@ class Post extends Model
     public function difficult()
     {
         return $this->belongsTo(Difficulty::class);
+    }
+    //repliesテーブルとのリレーション
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
     }
 }
