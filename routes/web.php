@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DifficultyController;
 
 
 
@@ -23,9 +25,10 @@ Route::controller(PostController::class)->middleware(['auth'])->group(function()
     Route::get('/', 'index')->name('post.index');
     Route::get('/posts', 'index')->name('post.index');
     Route::get('/posts/create', 'create')->name('post.create');
+    //検索用
+    Route::get('/searchpost', 'search')->name('searchpost');
     Route::get('/posts/{post}', 'show')->name('post.show');
     Route::post('/posts', 'store')->name('post.store');
-
 });
 
 // 返信用コントローラー
@@ -35,11 +38,18 @@ Route::controller(ReplyController::class)->middleware(['auth'])->group(function(
     Route::post('/posts/show/{post}', 'store')->name('reply.store');
  
 });
+
 // 個別返信用コントローラー
 Route::controller(CommentController::class)->middleware(['auth'])->group(function(){
     Route::get('/comments/create/{reply}', 'create')->name('comment.create');
     Route::post('/replies/show/{reply}', 'store')->name('comment.store');
 });
+
+// カテゴリ用コントローラー
+Route::get('/categories/{category}', [CategoryController::class,'index']);
+
+// 難易度用コントローラー
+Route::get('/difficulties/{difficulty}', [DifficultyController::class,'index']);
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

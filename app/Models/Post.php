@@ -12,7 +12,6 @@ class Post extends Model
     {
         return $this::with('category')->orderBy('updated_at','DESC')->paginate($limit_count);
     }
-    
     protected $fillable = [
         'title',
         'body',
@@ -31,7 +30,7 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
     // difficultiesテーブルとのリレーション
-    public function difficult()
+    public function difficulty()
     {
         return $this->belongsTo(Difficulty::class);
     }

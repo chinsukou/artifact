@@ -9,14 +9,32 @@ use App\Models\Category;
 use App\Models\Difficulty;
 use App\Models\User;
 use App\Http\Requests\PostRequest;
+use App\Models\Reply;
+use App\Models\Comment;
 
 class PostController extends Controller
 {
     //投稿一覧
-    public function index(Post $post)
+    public function index(Post $post, Request $request)
     {
-        return view('posts.index')->with(['posts' => $post->getPaginateByLimit()]);
+        $category = new Category;
+        $categories = $category->getLists();
+        $difficulty = new Difficulty;
+        $difficulties = $difficulty->getLists();
+        $searchWord = $request->input('searchWord');
+        $categoryId = $request->input('categoryId');
+        $difficultyId = $request->input('difficultyId');
+        
+        return view('posts.index')->with([
+            'posts' => $post->getPaginateByLimit(),
+            'categories' => $categories,
+            'difficulties' => $difficulties,
+            'searchWord' => $searchWord,
+            'categoryId' => $categoryId,
+            'difficultyId' => $difficultyId,
+        ]);
     }
+    
     //投稿詳細
     public function show(Post $post, Reply $reply)
     {
@@ -41,5 +59,53 @@ class PostController extends Controller
         $post->user_id = Auth::id();
         $post->fill($input)->save();
         return redirect('/posts/' . $post->id);
+    }
+    //検索メソッド
+    public function search(Request $request)
+    {
+        // 入力される値
+        $searchWord = $request->input('searchWord');//タイトルの値
+        $categoryId = $request->input('categoryId');//カテゴリの値
+        $difficultyId = $request->input('difficultyId');//難易度の値
+        
+        $query = Post::query();
+        //入力された時Postテーブルから一致する投稿を$queryに代入
+        if(isset($searchWord)) {
+            $query->where('title', 'like', '%' . self::escapeLike($searchWord) . '%');
+        }
+        // カテゴリが選択された場合Categoriesテーブルからcategory_idが一致する投稿を$queryに代入
+        if(isset($categoryId)) {
+            $query->where('category_id', $categoryId);
+        }
+        // 難易度が選択された場合Difficultiesテーブルからdifficulty_idが一致する投稿を$queryに代入
+        if(isset($difficultyId)) {
+            $query->where('difficulty_id', $difficultyId);
+        }
+        
+        // $queryをcategory_idの昇順に並び替えて$postsに代入
+        $posts = $query->orderBy('category_id', 'ASC')->paginate(15);
+        
+        // CategoriesテーブルからgetLists();関数でcategory_idとnameを取得
+        $category = new Category;
+        $categories = $category->getLists();
+        
+        // DifficultiesテーブルからgetLists();関数でdifficulty_idとnameを取得
+        $difficulty = new Difficulty;
+        $difficulties = $difficulty->getLists();
+        
+        return view('posts.index')->with([
+            'posts' => $posts,
+            'categories' => $categories,
+            'difficulties' => $difficulties,
+            'searchWord' => $searchWord,
+            'categoryId' => $categoryId,
+            'difficultyId' => $difficultyId,
+        ]);
+    }
+    
+    // エスケープ処理
+    public static function escapeLike($str)
+    {
+        return str_replace(['\\', '%', '_'], ['\\\\', '\%', '\_'], $str);
     }
 }
