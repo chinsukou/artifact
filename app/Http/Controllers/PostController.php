@@ -9,8 +9,6 @@ use App\Models\Category;
 use App\Models\Difficulty;
 use App\Models\User;
 use App\Http\Requests\PostRequest;
-use App\Models\Reply;
-use App\Models\Comment;
 
 class PostController extends Controller
 {
