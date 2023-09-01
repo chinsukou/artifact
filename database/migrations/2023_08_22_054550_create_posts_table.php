@@ -18,8 +18,8 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->foreignId('difficulty_id')->constrained();
             $table->foreignId('category_id')->constrained();
-            $table->string('title',30);
-            $table->string('body');
+            $table->string('title',100);
+            $table->string('body',1000);
             $table->timestamps();
         });
     }

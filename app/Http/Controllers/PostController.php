@@ -18,9 +18,12 @@ class PostController extends Controller
         return view('posts.index')->with(['posts' => $post->getPaginateByLimit()]);
     }
     //投稿詳細
-    public function show(Post $post)
+    public function show(Post $post, Reply $reply)
     {
-        return view('posts.show')->with(['post' => $post]);
+        return view('posts.show')->with([
+            'post' => $post,
+            'replies' => $reply->getReplies(),
+        ]);
     }
     //新規投稿作成画面
     public function create(Category $category,  Difficulty $difficulty, User $user)
@@ -29,7 +32,7 @@ class PostController extends Controller
             'categories' => $category->get(),
             'difficulties' => $difficulty->get(),
             //'users' => $user->get()
-            ]);
+        ]);
     }
     //投稿をDBに保存して投稿一覧へリダイレクト
     public function store(PostRequest $request, Post $post)
