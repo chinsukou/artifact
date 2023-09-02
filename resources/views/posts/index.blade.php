@@ -1,4 +1,10 @@
-
+<head>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+  
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+</head>
 <x-app-layout>
     <h1>HOME</h1>
     <br>
@@ -61,11 +67,25 @@
       <p>全{{ $posts->count() }}件</p>
         @foreach($posts as $post)
             <p><a href="/categories/{{ $post->category->id }}">カテゴリー：{{ $post->category->name }}</a></p>
-            <p><a href="/difficulties/{{ $post->difficulty->id }}">難易度：{{ $post->difficulty->name }}</a></p>
+            <p>難易度：{{ $post->difficulty->name }}</a></p>
             <a href="/posts/{{ $post->id }}">
             <h2 class='title'>{{ $post->title }}</h2>
                 <p class='body'>{{ $post->body }}</p>&nbsp;
             </a>
+            @auth
+            <!-- Post.phpに作ったisLikedByメソッドをここで使用 -->
+            @if (!$post->isLikedBy(Auth::user()))
+                <span class="likes">
+                    <i class="fas fa-heart like-toggle" data-post-id="{{ $post->id }}"></i>
+                <span class="like-counter">{{$post->likes_count}}</span>
+                </span><!-- /.likes -->
+            @else
+                <span class="likes">
+                    <i class="fas fa-heart heart like-toggle liked" data-post-id="{{ $post->id }}"></i>
+                <span class="like-counter">{{$post->likes_count}}</span>
+                </span><!-- /.likes -->
+            @endif
+            @endauth
         @endforeach   
     </div>
     <!--テーブルここまで-->
@@ -74,33 +94,8 @@
       {{-- appendsでカテゴリを選択したまま遷移 --}}
       {{ $posts->appends(request()->input())->links() }}
     </div>
-    <!--ページネーションここまで-->
     @endif
   </div>
-    
-{{--    <!--投稿を表示する-->
-    <div class='posts'>
-        @foreach ($posts as $post)
-            <div class='posts'>
-                <p><a href="/categories/{{ $post->category->id }}">カテゴリー：{{ $post->category->name }}</a></p>
-                <p><a href="/difficulties/{{ $post->difficulty->id }}">難易度：{{ $post->difficulty->name }}</a></p>
-                <a href="/posts/{{ $post->id }}">
-                    <h2 class='title'>
-                        {{ $post->title }}
-                        <br>
-                    </h2>
-                    <p class='body'>{{ $post->body }}</p>
-                </a>
-            </div>
-            <br>
-        @endforeach
-    </div>
-    <!--ページネイション-->
-    <div class='paginate'>
-        {{ $posts->links() }}
-    </div>
-    <!--投稿ページへ-->
-    <div>--}}
         <a href='/posts/create'>投稿する</a>
     </div>
     <br>

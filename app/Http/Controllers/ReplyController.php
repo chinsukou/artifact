@@ -18,7 +18,7 @@ class ReplyController extends Controller
         return view('replies.show')->with([
             'post' => $post,
             'reply' => $reply,
-            'comments' => $comment->getComments(),
+            'comments' => $comment->where('reply_id', $reply->id)->get(),
         ]);
     }
     // 投稿への返信

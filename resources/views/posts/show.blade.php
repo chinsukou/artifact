@@ -23,7 +23,7 @@
     <h3>返信一覧</h3>
     <br>
     <div class="content_reply">
-            @foreach($replies as $reply)
+            @foreach($post->replies as $reply)
                 <div class="content">
                     <div class="content_contents">
                         <a href='/replies/{{ $reply->id }}'><p>{{ $reply->body }}</p></a>

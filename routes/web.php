@@ -29,6 +29,8 @@ Route::controller(PostController::class)->middleware(['auth'])->group(function()
     Route::get('/searchpost', 'search')->name('searchpost');
     Route::get('/posts/{post}', 'show')->name('post.show');
     Route::post('/posts', 'store')->name('post.store');
+    // いいね用
+    Route::post('/posts/like', 'like')->name('posts.like');
 });
 
 // 返信用コントローラー
