@@ -10,7 +10,7 @@ class Post extends Model
     use HasFactory;
     public function getPaginateByLimit(int $limit_count = 10)
     {
-        return $this::with('category')->orderBy('updated_at','DESC')->paginate($limit_count);
+        return $this::withCount('likes')->with('category')->orderBy('updated_at','DESC')->paginate($limit_count);
     }
     protected $fillable = [
         'title',
@@ -19,6 +19,17 @@ class Post extends Model
         'difficulty_id',
         'user_id'
     ];
+    
+    
+    // Viewで使う、いいねされているかを判定するメソッド。
+    public function isLikedBy($user): bool {
+        return Like::where('user_id', $user->id)->where('post_id', $this->id)->first() !==null;
+    }
+    //
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
     // categoriesテーブルとのリレーション
     public function category()
     {
