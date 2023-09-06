@@ -16,7 +16,7 @@ class ReplyController extends Controller
     public function show(Post $post, Reply $reply, Comment $comment)
     {
         return view('replies.show')->with([
-            'post' => $post,
+            'post' => $reply->post,
             'reply' => $reply,
             'comments' => $comment->where('reply_id', $reply->id)->get(),
         ]);

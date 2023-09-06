@@ -1,36 +1,63 @@
+<head>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+  
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+</head>
 <x-app-layout>
-    <!--カテゴリー-->
-    <a fref="">{{ $post->category->name }}</a>
-    <!--タイトル-->
-    <h1 class="title">
-        {{ $post->title }}
-    </h1>
-    <!--本文-->
-    <div class="content">
-        <div class="content_post">
-            <p>{{ $post->body }}</p>
+    <div class"mx-auto container">
+        <!--カテゴリー-->
+        <a fref="">{{ $post->category->name }}</a>
+        <br>
+        <!--難易度-->
+        <a fref="">{{ $post->difficulty->name }}</a>
+        <!--タイトル-->
+        <h1 class="title">
+            {{ $post->title }}
+        </h1>
+        <!--本文-->
+        <div class="content">
+            <div class="content_post">
+                <p>{{ $post->body }}</p>
+                 @auth
+                <!-- Post.phpに作ったisLikedByメソッドをここで使用 -->
+                @if (!$post->isLikedBy(Auth::user()))
+                    <span class="likes">
+                        <i class="fas fa-heart like-toggle" data-post-id="{{ $post->id }}"></i>
+                    <span class="like-counter">{{$post->likes_count}}</span>
+                    </span><!-- /.likes -->
+                @else
+                    <span class="likes">
+                        <i class="fas fa-heart heart like-toggle liked" data-post-id="{{ $post->id }}"></i>
+                    <span class="like-counter">{{$post->likes_count}}</span>
+                    </span><!-- /.likes -->
+                @endif
+                @endauth
+            </div>
         </div>
-    </div>
-    <!--返信-->
-    <div class="content">
+        <!--返信-->
+        <div class="content">
+            <div class="content_reply">
+                {{--<p>{{ $reply->body }}</p>--}}
+                <a href='/replies/create/{{ $post->id }}'>返信する</a>
+            </div>
+        </div>
+        <br>
+        <!--返信一覧表示-->
+        <h3>返信一覧</h3>
+        <br>
         <div class="content_reply">
-            {{--<p>{{ $reply->body }}</p>--}}
-            <a href='/replies/create/{{ $post->id }}'>返信する</a>
-        </div>
-    </div>
-    <br>
-    <!--返信一覧表示-->
-    <h3>返信一覧</h3>
-    <br>
-    <div class="content_reply">
-            @foreach($post->replies as $reply)
-                <div class="content">
-                    <div class="content_contents">
-                        <a href='/replies/{{ $reply->id }}'><p>{{ $reply->body }}</p></a>
+                @foreach($post->replies as $reply)
+                    <div class="content">
+                        <div class="content_contents">
+                            <a href='/replies/{{ $reply->id }}'><p>{{ $reply->body }}</p></a>
+                        </div>
                     </div>
-                </div>
-                <br>
-            @endforeach
+                    <br>
+                @endforeach
+        </div>
     </div>
     <div class="footer">
         <a href="/">戻る</a>
