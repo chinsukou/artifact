@@ -12,11 +12,12 @@ use App\Models\Comment;
 class CommentController extends Controller
 {
     // 返信へのコメント
-    public function create(Reply $reply, Post $post)
+    public function create(Post $post, Reply $reply, Comment $comment)
     {
         return view('comments.create')->with([
             'post' => $post,
             'reply' => $reply,
+            'comments' => $comment->where('reply_id', $reply->id)->get(),
         ]);
     }
     // コメントの保存
