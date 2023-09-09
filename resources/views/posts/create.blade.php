@@ -7,7 +7,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 <x-app-layout>
-    <div class"mx-auto container bg-white">
+    <div class"mx-auto container">
         <h1>投稿作成</h1>
         <form action="/posts" method="POST">
             @csrf
@@ -34,6 +34,12 @@
                 <h2>タイトル</h2>
                 <input type="text" name="post[title]" placeholder="タイトル" value="{{ old('post.title') }}"/>
                 <p class="title_error" style="color:red">{{ $errors->first('post.title') }}</p>
+            </div>
+            <!--タグ-->
+            <div class="tag">
+                <h2>タグ</h2>
+                <input type="text" name="tags" placeholder="#タグを付けましょう" value"{{ old('tags') }}"/>
+                <p class="tag_error">{{ $errors->first('tags') }}</p>
             </div>
             <!--本文-->
             <div class="body">

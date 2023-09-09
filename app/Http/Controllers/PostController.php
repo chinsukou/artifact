@@ -12,6 +12,7 @@ use App\Http\Requests\PostRequest;
 use App\Models\Reply;
 use App\Models\Comment;
 use App\Models\Like;
+use App\Models\Tag;
 
 class PostController extends Controller
 {
@@ -63,9 +64,26 @@ class PostController extends Controller
     //投稿をDBに保存して投稿一覧へリダイレクト
     public function store(PostRequest $request, Post $post)
     {
+        // #タグで始まる単語を取得し、結果を$matchに多次元配列で代入
+        preg_match_all('/#([a-zA-z0-9０-９ぁ-んァ-ヶ亜-熙]+)/u', $request->tags, $match);
+        //$match[0]に#あり、$match[1]に#なしの結果が入ってくるので、$match[1]で#なしの結果のみ使う
+        $tags = [];
+        foreach ($match[1] as $tag){
+            $record = Tag::firstOrCreate(['name' => $tag]);//firstOrCreateメソッドで。tags_tableのnameに該当のない$tagは新規登録
+            array_push($tags, $record);//$recordを配列に追加
+        };
+        
+        //投稿に紐付けされるタグのidを配列化
+        $tags_id = [];
+        foreach ($tags as $tag) {
+            array_push($tags_id, $tag['id']);
+        };
+        
         $input = $request['post'];
         $post->user_id = Auth::id();
         $post->fill($input)->save();
+        $post->tags()->attach($tags_id);// 投稿ににタグ付するために、attachメソッドをつかい、モデルを結びつけている中間テーブルにレコードを挿入
+
         return redirect('/posts/' . $post->id);
     }
     //検索メソッド

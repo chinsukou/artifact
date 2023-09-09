@@ -49,13 +49,13 @@ Route::controller(CommentController::class)->middleware(['auth'])->group(functio
 });
 
 // カテゴリ用コントローラー
-Route::get('/categories/{category}', [CategoryController::class,'index'])->name('category.index');
+Route::get('/categories/{category}', [CategoryController::class,'index'])->middleware(['auth'])->name('category.index');
 
 // 難易度用コントローラー
-Route::get('/difficulties/{difficulty}', [DifficultyController::class,'index'])->name('diffidulty.index');
+Route::get('/difficulties/{difficulty}', [DifficultyController::class,'index'])->middleware(['auth'])->name('diffidulty.index');
 
 // いいね用コントローラー
-Route::get('/likes', [LikeController::class,'index'])->name('like.index');
+Route::get('/likes', [LikeController::class,'index'])->middleware(['auth'])->name('like.index');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

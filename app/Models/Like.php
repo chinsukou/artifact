@@ -18,7 +18,7 @@ class Like extends Model
     
     public function getByLike()
     {
-        return $this->post()->where('user_id', Auth::id())->orderBy('updated_at','DESC')->get();
+        return $this->post()->where('user_id', Auth::id())->orderBy('created_at','DESC')->get();
     }
 
     public function post()
