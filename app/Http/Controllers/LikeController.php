@@ -9,8 +9,10 @@ class LikeController extends Controller
 {
     public function index(Like $like)
     {
+        $user = \Auth::user();
+        
         return view('likes.index')->with([
-            'posts' => $like->getByLike(),
+            'posts' => $user->likes,
         ]);
     }
 }

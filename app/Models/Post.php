@@ -17,7 +17,8 @@ class Post extends Model
         'body',
         'category_id',
         'difficulty_id',
-        'user_id'
+        'user_id',
+        'tag_id'
     ];
     
     
@@ -49,5 +50,9 @@ class Post extends Model
     public function replies()
     {
         return $this->hasMany(Reply::class);
+    }
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
     }
 }

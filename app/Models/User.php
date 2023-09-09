@@ -44,7 +44,7 @@ class User extends Authenticatable
     // likesテーブルとのリレーション
     public function likes()
     {
-        return $this->hasMany(Like::class);
+        return $this->belongsToMany(Post::class, 'likes', 'user_id', 'post_id');
     }
     // postsテーブルとのリレーション
     public function posts()

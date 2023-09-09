@@ -81,7 +81,7 @@
       {{-- appendsでカテゴリを選択したまま遷移 --}}
       {{ $posts->appends(request()->input())->links() }}
     @endif
-    <div class="flex-end">
+    <div class="flex-center">
         <a href='/posts/create'>投稿する</a>
     </div>
 </x-app-layout>
