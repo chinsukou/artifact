@@ -7,18 +7,18 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 <x-app-layout>
-    <div class"mx-auto container">
-        <!--カテゴリー-->
-        <a fref="">{{ $post->category->name }}</a>
-        <br>
-        <!--難易度-->
-        <a fref="">{{ $post->difficulty->name }}</a>
-        <!--タイトル-->
-        <h1 class="title">
-            {{ $post->title }}
-        </h1>
-        <!--本文-->
-        <div class="content">
+    <div class='mx-auto container'>
+        <div class="border rounded bg-white p-3">
+            <!--カテゴリー-->
+            <a fref="">{{ $post->category->name }}</a>
+            <br>
+            <!--難易度-->
+            <a fref="">{{ $post->difficulty->name }}</a>
+            <!--タイトル-->
+            <h1 class="title">
+                {{ $post->title }}
+            </h1>
+            <!--本文-->
             <div class="content_post">
                 <p>{{ $post->body }}</p>
                  @auth
@@ -39,8 +39,7 @@
         </div>
         <!--返信-->
         <div class="content">
-            <div class="content_reply">
-                {{--<p>{{ $reply->body }}</p>--}}
+            <div class="">
                 <a href='/replies/create/{{ $post->id }}'>返信する</a>
             </div>
         </div>
@@ -48,18 +47,17 @@
         <!--返信一覧表示-->
         <h3>返信一覧</h3>
         <br>
-        <div class="content_reply">
-                @foreach($post->replies as $reply)
+            @foreach($post->replies as $reply)
+                <div class="rounded border bg-white p-3">
                     <div class="content">
                         <div class="content_contents">
                             <a href='/replies/{{ $reply->id }}'><p>{{ $reply->body }}</p></a>
                         </div>
                     </div>
-                    <br>
-                @endforeach
-        </div>
+                </div>
+            @endforeach
     </div>
-    <div class="footer">
+    <div class="flex-end">
         <a href="/">戻る</a>
     </div>
 </x-app-layout>

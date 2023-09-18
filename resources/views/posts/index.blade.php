@@ -9,15 +9,15 @@
 <x-app-layout>
   <div class="mx-auto container">
     <!--検索フォーム-->
-    <form class="md:flex" method="GET" action="{{ route('searchpost')}}">
+    <form class="md:flex justify-center" method="GET" action="{{ route('searchpost')}}">
       <!--タイトル検索-->
       <div>
-        <label class="">タイトル検索</label>
+        <label class="p-5">タイトル検索</label>
         <input type="text" class="" name="searchWord" value="{{ $searchWord }}">
       </div>
       <!--プルダウンカテゴリ選択-->
       <div>
-        <label class="">カテゴリ</label>
+        <label class="p-5">カテゴリ</label>
         <select name="categoryId" class="" value="{{ $categoryId }}">
           <option value="">未選択</option>
   
@@ -30,7 +30,7 @@
       </div>
       <!--プルダウン難易度選択-->
       <div>
-        <label class="">難易度</label>
+        <label class="p-5">難易度</label>
         <select name="difficultyId" class="form-control" value="{{ $difficultyId }}">
           <option value="">未選択</option>
   
@@ -41,18 +41,16 @@
           @endforeach
         </select>
       </div>
-      <div>
-        <button type="submit" class="">検索</button>
+      <div class='flex items-center justify-center'>
+        <button type="submit" class='border rounded bg-blue-500 h-full w-full'>検索</button>
       </div>
     </form>
-  </div>
-    
+
     <!--検索結果テーブル 検索された時のみ表示する-->
     @if (!empty($posts))
-    <div class="mx-auto container">
       <p>全{{ $posts->count() }}件</p>
       @foreach($posts as $post)
-        <div class="rounded border bg-white p-4">
+        <div class="rounded border bg-white p-3">
           <p><a href="/categories/{{ $post->category->id }}">カテゴリー：{{ $post->category->name }}</a></p>
           <p>難易度：{{ $post->difficulty->name }}</p>
           <a href="/posts/{{ $post->id }}">
@@ -68,20 +66,20 @@
             </span><!-- /.likes -->
           @else
             <span class="likes">
-              <i class="fas fa-heart heart like-toggle liked" data-post-id="{{ $post->id }}"></i>
+              <i class="fas fa-heart like-toggle liked" data-post-id="{{ $post->id }}"></i>
               <span class="like-counter">{{$post->likes_count}}</span>
             </span><!-- /.likes -->
           @endif
           @endauth
         </div>
       @endforeach   
-    </div>
     <!--テーブルここまで-->
     <!--ページネーション-->
       {{-- appendsでカテゴリを選択したまま遷移 --}}
       {{ $posts->appends(request()->input())->links() }}
     @endif
-    <div class="flex-center">
+    </div>
+    <div class="text-center rounded border bg-blue-500 w-20">
         <a href='/posts/create'>投稿する</a>
     </div>
 </x-app-layout>

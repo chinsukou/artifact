@@ -7,7 +7,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 <x-app-layout>
-    <div class"mx-auto container">
+    <div class='mx-auto container'>
         <h1>投稿作成</h1>
         <form action="/posts" method="POST">
             @csrf
