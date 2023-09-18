@@ -10,7 +10,7 @@
  <div class="mx-auto container">
       <p>全{{ $posts->count() }}件</p>
       @foreach($posts as $post)
-        <div class="rounded border bg-white p-4">
+        <div class="rounded border bg-white p-3">
           <p><a href="/categories/{{ $post->category->id }}">カテゴリー：{{ $post->category->name }}</a></p>
           <p>難易度：{{ $post->difficulty->name }}</p>
           <a href="/posts/{{ $post->id }}">

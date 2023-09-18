@@ -6,39 +6,37 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 <x-app-layout>
-    <div class"mx-auto container">
+    <div class='mx-auto container'>
         <h1>コメント作成</h1>
-        <!--コメント対象の投稿-->
-        <h2>{{ $reply->post->title }}</h2>
-        <p>{{ $reply->post->body }}</p>
-        @auth
-        <!-- Post.phpに作ったisLikedByメソッドをここで使用 -->
-        @if (!$reply->post->isLikedBy(Auth::user()))
-            <span class="likes">
-                <i class="fas fa-heart like-toggle" data-post-id="{{ $reply->post->id }}"></i>
-            <span class="like-counter">{{$reply->post->likes_count}}</span>
-            </span><!-- /.likes -->
-        @else
-            <span class="likes">
-                <i class="fas fa-heart heart like-toggle liked" data-post-id="{{ $reply->post->id }}"></i>
-            <span class="like-counter">{{$reply->post->likes_count}}</span>
-            </span><!-- /.likes -->
-        @endif
-        @endauth
-        <!--コメント対象の返信-->
-        <p>{{ $reply->body }}</p>
-        <!--コメント一覧表示-->
-        <div class="content_reply">
-            @foreach($comments as $comment)
-                <div class="content">
-                    <div class="content_contents">
-                        <br>
-                        <p>{{ $comment->body }}</p>
-                    </div>
-                </div>
-                <br>
-            @endforeach
+        <div class='border rounded bg-white p-3'>
+            <!--コメント対象の投稿-->
+            <h2>{{ $reply->post->title }}</h2>
+            <p>{{ $reply->post->body }}</p>
+            @auth
+            <!-- Post.phpに作ったisLikedByメソッドをここで使用 -->
+            @if (!$reply->post->isLikedBy(Auth::user()))
+                <span class="likes">
+                    <i class="fas fa-heart like-toggle" data-post-id="{{ $reply->post->id }}"></i>
+                <span class="like-counter">{{$reply->post->likes_count}}</span>
+                </span><!-- /.likes -->
+            @else
+                <span class="likes">
+                    <i class="fas fa-heart heart like-toggle liked" data-post-id="{{ $reply->post->id }}"></i>
+                <span class="like-counter">{{$reply->post->likes_count}}</span>
+                </span><!-- /.likes -->
+            @endif
+            @endauth
         </div>
+        <div class='border rounded bg-whitep-3'>
+                <!--コメント対象の返信-->
+                <p>{{ $reply->body }}</p>
+        </div>
+        <!--コメント一覧表示-->
+        @foreach($comments as $comment)
+            <div class="border rounded bg-white p-3">
+                <p>{{ $comment->body }}</p>
+            </div>
+            @endforeach
         <form action="/replies/show/{{ $reply->id }}" method="POST">
             @csrf
             <!--コメント本文-->

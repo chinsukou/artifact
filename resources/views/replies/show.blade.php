@@ -7,10 +7,10 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 <x-app-layout>
-    <div class"mx-auto container">
+    <div class='mx-auto container'>
         <!--カテゴリー-->
         <!--本文-->
-        <div class="content">
+        <div class="rounded border bg-white p-3">
            <div class="content_post">
                <p>{{ $post->title }}</p>
                <p>{{ $post->body }}</p>
@@ -31,25 +31,22 @@
            </div>
         </div>
         <!--返信-->
-        <div class="content">
+        <div class="rounded border bg-white p-3">
            <div class="content_post">
                <p>{{ $reply->body }}</p>
            </div>
         </div>
-        <br>
         <!--コメント一覧表示-->
-        <div class="content_reply">
             @foreach($comments as $comment)
-                <div class="content">
-                    <div class="content_contents">
-                        <br>
-                        <p>{{ $comment->body }}</p>
+                <div class="rounded border bg-white p-3">
+                    <div class="content">
+                        <div class="content_contents">
+                            <p>{{ $comment->body }}</p>
+                        </div>
                     </div>
                 </div>
-                <br>
             @endforeach
             <a href='/comments/create/{{ $reply->id }}'>コメントする</a>
-        </div>
     </div>
     <div class="footer">
         <a href="/posts/{{ $post->id }}">戻る</a>

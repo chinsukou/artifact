@@ -7,26 +7,27 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 <x-app-layout>
-    <div class"mx-auto container">
+    <div class='mx-auto container'>
         <h1>返信</h1>
-        <!--返信対象の投稿-->
-        <h1>{{ $post->title }}</h1>
-        <p>{{ $post->body }}</p>
-        @auth
-        <!-- Post.phpに作ったisLikedByメソッドをここで使用 -->
-        @if (!$post->isLikedBy(Auth::user()))
-            <span class="likes">
-                    <i class="fas fa-heart like-toggle" data-post-id="{{ $post->id }}"></i>
+        <div class='border rounded bg-white p-3'>
+            <!--返信対象の投稿-->
+            <h1>{{ $post->title }}</h1>
+            <p>{{ $post->body }}</p>
+            @auth
+            <!-- Post.phpに作ったisLikedByメソッドをここで使用 -->
+            @if (!$post->isLikedBy(Auth::user()))
+                <span class="likes">
+                        <i class="fas fa-heart like-toggle" data-post-id="{{ $post->id }}"></i>
+                    <span class="like-counter">{{$post->likes_count}}</span>
+                </span><!-- /.likes -->
+            @else
+                <span class="likes">
+                    <i class="fas fa-heart heart like-toggle liked" data-post-id="{{ $post->id }}"></i>
                 <span class="like-counter">{{$post->likes_count}}</span>
-            </span><!-- /.likes -->
-        @else
-            <span class="likes">
-                <i class="fas fa-heart heart like-toggle liked" data-post-id="{{ $post->id }}"></i>
-            <span class="like-counter">{{$post->likes_count}}</span>
-            </span><!-- /.likes -->
-        @endif
-        @endauth
-    
+                </span><!-- /.likes -->
+            @endif
+            @endauth
+        </div>
         <form action="/posts/show/{{ $post->id }}" method="POST">
             @csrf
             <!--返信本文-->
