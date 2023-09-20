@@ -7,7 +7,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 <x-app-layout>
-    <div class='mx-auto container'>
+    <div class='bg-gradient-to-r from-purple-800 via-blue-800 to-indigo-700 min-h-full'>
+        <div class='mx-auto container'>
         <!--カテゴリー-->
         <!--本文-->
         <div class="rounded border bg-white p-3">
@@ -46,9 +47,13 @@
                     </div>
                 </div>
             @endforeach
-            <a href='/comments/create/{{ $reply->id }}'>コメントする</a>
+            <div class='rounded bg-blue-500 hover:bg-blue-700 text-white w-fit'>
+                <a href='/comments/create/{{ $reply->id }}'>コメントする</a>
+            </div>
     </div>
-    <div class="footer">
+    <div class="rounded bg-blue-500 hover:bg-blue-700 text-white w-fit">
         <a href="/posts/{{ $post->id }}">戻る</a>
+    </div>
+
     </div>
 </x-app-layout>
