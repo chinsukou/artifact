@@ -7,11 +7,11 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 <x-app-layout>
-    <div class='mx-auto container'>
-         <h1>カテゴリ別</h1>
-        <!--投稿を表示する-->
+    <div class='bg-gradient-to-r from-purple-800 via-blue-800 to-indigo-700 min-h-full'>
+        <div class='mx-auto container'>
+            <!--投稿を表示する-->
             @foreach ($posts as $post)
-                <div class='rounded border bg-white p-3'>
+                <div class='rounded border bg-white hover:bg-gray-100 p-3'>
                     <p><a href="/categories/{{ $post->category->id }}">カテゴリー：{{ $post->category->name }}</a></p>
                     <p><a href="/difficulties/{{ $post->difficulty->id }}">難易度：{{ $post->difficulty->name }}</a></p>
                     <a href="/posts/{{ $post->id }}">
@@ -35,16 +35,17 @@
                 </div>
             @endforeach
         <!--ページネイション-->
-        <div class='paginate'>
+        <div class='flex text-white'>
             {{ $posts->links() }}
         </div>
     </div>
         <!--投稿ページへ-->
-        <div>
+        <div class='rounded bg-blue-500 hover:bg-blue-700 text-white w-fit'>
             <a href='/posts/create'>投稿する</a>
         </div>
         <br>
-        <div class="bg-red-100">
+        <div class="rounded bg-blue-500 hover:bg-blue-700 text-white w-fit">
             <a href="/">戻る</a>
         </div>
+    </div>
 </x-app-layout>

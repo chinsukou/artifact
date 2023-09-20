@@ -7,17 +7,18 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 <x-app-layout>
-  <div class="mx-auto container">
-    <!--検索フォーム-->
-    <form class="md:flex justify-center" method="GET" action="{{ route('searchpost')}}">
+  <div class='bg-gradient-to-r from-purple-800 via-blue-800 to-indigo-700 min-h-full'>
+    <div class="mx-auto container">
+      <!--検索フォーム-->
+      <form class="md:flex justify-center p-5" method="GET" action="{{ route('searchpost')}}">
       <!--タイトル検索-->
       <div>
-        <label class="p-5">タイトル検索</label>
+        <label class="text-white p-5">タイトル検索</label>
         <input type="text" class="" name="searchWord" value="{{ $searchWord }}">
       </div>
       <!--プルダウンカテゴリ選択-->
       <div>
-        <label class="p-5">カテゴリ</label>
+        <label class="text-white p-5">カテゴリ</label>
         <select name="categoryId" class="" value="{{ $categoryId }}">
           <option value="">未選択</option>
   
@@ -30,7 +31,7 @@
       </div>
       <!--プルダウン難易度選択-->
       <div>
-        <label class="p-5">難易度</label>
+        <label class="text-white p-5">難易度</label>
         <select name="difficultyId" class="form-control" value="{{ $difficultyId }}">
           <option value="">未選択</option>
   
@@ -41,17 +42,17 @@
           @endforeach
         </select>
       </div>
-      <div class='flex items-center justify-center'>
-        <button type="submit" class='border rounded bg-blue-500 h-full w-full'>検索</button>
+      <div class='flex items-center justify-center px-4'>
+        <button type="submit" class='rounded bg-blue-500 text-white hover:bg-blue-700 h-fit w-full'>検索</button>
       </div>
     </form>
 
     <!--検索結果テーブル 検索された時のみ表示する-->
     @if (!empty($posts))
-      <p>全{{ $posts->count() }}件</p>
+      <p class='text-white'>全{{ $posts->count() }}件</p>
       @foreach($posts as $post)
-        <div class="rounded border bg-white p-3">
-          <p><a href="/categories/{{ $post->category->id }}">カテゴリー：{{ $post->category->name }}</a></p>
+        <div class="rounded border bg-white hover:bg-gray-100 p-3">
+          <p class='hover:text-red-500 w-fit'><a href="/categories/{{ $post->category->id }}">カテゴリー：{{ $post->category->name }}</a></p>
           <p>難易度：{{ $post->difficulty->name }}</p>
           <a href="/posts/{{ $post->id }}">
             <h2 class='title font-bold'>{{ $post->title }}</h2>
@@ -76,10 +77,13 @@
     <!--テーブルここまで-->
     <!--ページネーション-->
       {{-- appendsでカテゴリを選択したまま遷移 --}}
-      {{ $posts->appends(request()->input())->links() }}
+      <div class='flex flex-col text-white'>
+        {{ $posts->appends(request()->input())->links() }}
+      </div>
     @endif
     </div>
-    <div class="text-center rounded border bg-blue-500 w-20">
+    <div class="rounded bg-blue-500 hover:bg-blue-700 text-white w-fit">
         <a href='/posts/create'>投稿する</a>
     </div>
+  </div>
 </x-app-layout>
