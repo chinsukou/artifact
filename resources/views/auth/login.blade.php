@@ -14,7 +14,7 @@
 
         <!-- Password -->
         <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+            <x-input-label for="password" :value="__('パスワード')" />
 
             <x-text-input id="password" class="block mt-1 w-full"
                             type="password"
@@ -28,20 +28,24 @@
         <div class="block mt-4">
             <label for="remember_me" class="inline-flex items-center">
                 <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                <span class="ml-2 text-sm text-gray-600">{{ __('ログインを保持する') }}</span>
             </label>
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
+        <div class="flex items-center justify-between mt-4">
+            <div class='border rounded bg-red-500 text-white'>
+                <a href='register'>登録</a>
+            </div>
+            <div class='justify-end'>
+                @if (Route::has('password.request'))
                 <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
+                    {{ __('パスワードをお忘れですか?') }}
                 </a>
-            @endif
-
+                @endif
             <x-primary-button class="ml-3">
-                {{ __('Log in') }}
+                {{ __('ログイン') }}
             </x-primary-button>
+            </div>
         </div>
     </form>
 </x-guest-layout>
