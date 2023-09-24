@@ -17,17 +17,17 @@ class DifficultySeeder extends Seeder
     public function run()
     {
         DB::table('difficulties')->insert([
-            'name' => 'easy',
+            'name' => 'EASY',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
         DB::table('difficulties')->insert([
-            'name' => 'nomal',
+            'name' => 'NOMAL',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
         DB::table('difficulties')->insert([
-            'name' => 'hard',
+            'name' => 'HARD',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);

@@ -18,32 +18,32 @@ class CategorySeeder extends Seeder
     public function run()
     {
         DB::table('categories')->insert([
-            'name' => 'カテゴリ1',
+            'name' => '英語',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
         DB::table('categories')->insert([
-            'name' => 'カテゴリ2',
+            'name' => 'プログラミング',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
         DB::table('categories')->insert([
-            'name' => 'カテゴリ3',
+            'name' => '楽器',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
         DB::table('categories')->insert([
-            'name' => 'カテゴリ4',
+            'name' => '筋トレ',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
         DB::table('categories')->insert([
-            'name' => 'カテゴリ5',
+            'name' => 'スポーツ',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
         DB::table('categories')->insert([
-            'name' => 'カテゴリ6',
+            'name' => '資格',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
