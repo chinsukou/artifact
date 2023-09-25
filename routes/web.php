@@ -9,15 +9,22 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DifficultyController;
 use App\Http\Controllers\LikeController;
 
+Auth::routes(['verify' => true]);
+
 // 投稿用コントローラー
 Route::controller(PostController::class)->middleware(['auth', 'verified'])->group(function(){
+    Route::get('/posts/create', 'create')->name('post.create');
+    //検索用
+    Route::post('/posts', 'store')->name('post.store');
+    // いいね用
+});
+
+Route::controller(PostController::class)->group(function(){
     Route::get('/', 'index')->name('post.index');
     Route::get('/posts', 'index')->name('post.index');
-    Route::get('/posts/create', 'create')->name('post.create');
     //検索用
     Route::get('/searchpost', 'search')->name('searchpost');
     Route::get('/posts/{post}', 'show')->name('post.show');
-    Route::post('/posts', 'store')->name('post.store');
     // いいね用
     Route::post('/posts/like', 'like')->name('posts.like');
 });
