@@ -9,8 +9,6 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DifficultyController;
 use App\Http\Controllers\LikeController;
 
-Auth::routes(['verify' => true]);
-
 // 投稿用コントローラー
 Route::controller(PostController::class)->middleware(['auth', 'verified'])->group(function(){
     Route::get('/posts/create', 'create')->name('post.create');
