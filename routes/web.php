@@ -12,9 +12,7 @@ use App\Http\Controllers\LikeController;
 // 投稿用コントローラー
 Route::controller(PostController::class)->middleware(['auth', 'verified'])->group(function(){
     Route::get('/posts/create', 'create')->name('post.create');
-    //検索用
     Route::post('/posts', 'store')->name('post.store');
-    // いいね用
 });
 
 Route::controller(PostController::class)->group(function(){
@@ -23,7 +21,7 @@ Route::controller(PostController::class)->group(function(){
     //検索用
     Route::get('/searchpost', 'search')->name('searchpost');
     Route::get('/posts/{post}', 'show')->name('post.show');
-    // いいね用
+    // 投稿へのいいね用
     Route::post('/posts/like', 'like')->name('posts.like');
 });
 
@@ -43,9 +41,6 @@ Route::controller(CommentController::class)->middleware(['auth', 'verified'])->g
 
 // カテゴリ用コントローラー
 Route::get('/categories/{category}', [CategoryController::class,'index'])->middleware(['auth', 'verified'])->name('category.index');
-
-// 難易度用コントローラー
-Route::get('/difficulties/{difficulty}', [DifficultyController::class,'index'])->middleware(['auth', 'verified'])->name('diffidulty.index');
 
 // いいね用コントローラー
 Route::get('/likes', [LikeController::class,'index'])->middleware(['auth', 'verified'])->name('like.index');

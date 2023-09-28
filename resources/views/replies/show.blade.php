@@ -7,7 +7,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 <x-app-layout>
-  <div class='bg-gradient-to-r from-purple-800 via-blue-800 to-indigo-700 min-h-full'>
+  <div class='bg-white h-full'>
     <div class='mx-auto py-2 container'>
       <!--カテゴリー-->
       <!--本文-->

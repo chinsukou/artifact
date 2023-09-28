@@ -7,9 +7,10 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 <x-app-layout>
-  <div class='bg-gradient-to-r from-purple-800 via-blue-800 to-indigo-700 min-h-full'>
+  <div class='bg-white h-full'>
     <div class='mx-auto py-2 container'>
       <!--投稿を表示する-->
+      <div class='font-semibold'>{{ $category->name }}カテゴリ</div>
       @foreach ($posts as $post)
       <div class='rounded border bg-white hover:bg-gray-100 p-3'>
         <p><a href="/categories/{{ $post->category->id }}">カテゴリー：{{ $post->category->name }}</a></p>
@@ -35,15 +36,10 @@
       </div>
       @endforeach
       <!--ページネイション-->
-      <div class='flex text-white'>
+      <div class='flex'>
         {{ $posts->links() }}
       </div>
       <div class='flex justify-end p-4'>
-        <!--投稿ページへ-->
-        <div class='rounded bg-blue-500 hover:bg-blue-700 text-white w-fit'>
-          <a href='/posts/create'>投稿する</a>
-        </div>
-      </div>
       <div class="rounded bg-blue-500 hover:bg-blue-700 text-white w-fit">
         <a href="/">戻る</a>
       </div>

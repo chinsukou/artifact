@@ -7,7 +7,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 <x-app-layout>
-  <div class='bg-gradient-to-r from-purple-800 via-blue-800 to-indigo-700 min-h-full'>
+  <div class='bg-white h-full'>
     <div class='mx-auto py-2 container'>
       <div class="border rounded bg-white p-3">
         <!--カテゴリー-->
@@ -45,7 +45,7 @@
         </div>
       </div>
       <!--返信一覧表示-->
-      <h3 class='text-white p-4'>返信一覧</h3>
+      <h3 class='font-semibold p-4'>返信一覧</h3>
       @foreach($post->replies as $reply)
       <div class="rounded border bg-white hover:bg-gray-100 p-3">
         <div class="content">

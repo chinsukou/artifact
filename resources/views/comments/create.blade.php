@@ -6,9 +6,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 <x-app-layout>
-  <div class='bg-gradient-to-r from-purple-800 via-blue-800 to-indigo-700 min-h-full'>
+  <div class='bg-white h-full'>
     <div class='mx-auto py-2 container'>
-      <h1 class='text-white'>コメント作成</h1>
+      <h1 class='font-semibold'>コメント作成</h1>
       <div class='border rounded bg-white p-3'>
         <!--コメント対象の投稿-->
         <h2>{{ $reply->post->title }}</h2>
@@ -42,7 +42,7 @@
         @csrf
         <!--コメント本文-->
         <div class="body">
-          <textarea class='resize-none h-1/5 w-full border-none' name="comment[body]"
+          <textarea class='resize-none h-1/5 w-full border-gray-300' name="comment[body]"
             placeholder="コメントを入力してください。">{{ old('comment.body') }}</textarea>
           <p class="comment_error" style="color:red">{{ $errors->first('comment.body') }}</p>
         </div>
