@@ -7,8 +7,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 <x-app-layout>
-  <div class='bg-gradient-to-r from-purple-800 via-blue-800 to-indigo-700 min-h-full'>
+  <div class='bg-white h-full'>
     <div class='mx-auto py-2 container'>
+      <div class='font-semibold'>返信作成</div>
       <div class='border rounded bg-white p-3'>
         <!--返信対象の投稿-->
         <h1>{{ $post->title }}</h1>
@@ -32,7 +33,7 @@
         @csrf
         <!--返信本文-->
         <div class="body">
-          <textarea class='resize-none h-1/5 w-full border-none' name="reply[body]"
+          <textarea class='resize-none h-1/5 w-full border-gray-300' name="reply[body]"
             placeholder="返信を入力ください。">{{ old('reply.body') }}</textarea>
           <p class="reply_error" style="color:red">{{ $errors->first('reply.body') }}</p>
         </div>

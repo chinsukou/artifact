@@ -7,18 +7,31 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 <x-app-layout>
-  <div class='bg-gradient-to-r from-purple-800 via-blue-800 to-indigo-700 min-h-full'>
+  <div class='bg-white h-full'>
     <div class="mx-auto py-2 container">
+      <div class='flex justify-between'>
+        <div class='font-semibold'>HOME</div>
+        <!--検索アイコン-->
+        <div>
+          <button class="textcenter text-gray-600 hover:text-black" id='searchIcon'>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+              </svg>
+          </button>
+        </div>
+      </div>
       <!--検索フォーム-->
-      <form class="md:flex justify-center p-5" method="GET" action="{{ route('searchpost')}}">
+      <form class="" id='searchForm' style='display:none;' method="GET" action="{{ route('searchpost')}}">
         <!--タイトル検索-->
         <div>
-          <label class="text-white p-5">タイトル検索</label>
+          <label class="p-5">タイトル検索</label>
           <input type="text" class="" name="searchWord" value="{{ $searchWord }}">
         </div>
         <!--プルダウンカテゴリ選択-->
         <div>
-          <label class="text-white p-5">カテゴリ</label>
+          <label class="p-5">カテゴリ</label>
           <select name="categoryId" class="" value="{{ $categoryId }}">
             <option value="">未選択</option>
 
@@ -31,7 +44,7 @@
         </div>
         <!--プルダウン難易度選択-->
         <div>
-          <label class="text-white p-5">難易度</label>
+          <label class="p-5">難易度</label>
           <select name="difficultyId" class="form-control" value="{{ $difficultyId }}">
             <option value="">未選択</option>
 
@@ -46,7 +59,6 @@
           <button type="submit" class='rounded bg-blue-500 text-white hover:bg-blue-700 h-fit w-full'>検索</button>
         </div>
       </form>
-
       <!--検索結果テーブル 検索された時のみ表示する-->
       @if (!empty($posts))
       <p class='text-white'>全{{ $posts->count() }}件</p>
@@ -82,11 +94,7 @@
         {{ $posts->appends(request()->input())->links() }}
       </div>
       @endif
-      <div class='flex justify-end p-4'>
-        <div class="rounded bg-blue-500 hover:bg-blue-700 text-white w-fit">
-          <a href='/posts/create'>投稿する</a>
-        </div>
-      </div>
     </div>
   </div>
+  <script src="{{ asset('js/app.js') }}"></script>
 </x-app-layout>

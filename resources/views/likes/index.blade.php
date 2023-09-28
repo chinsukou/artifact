@@ -7,9 +7,13 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 <x-app-layout>
-  <div class='bg-gradient-to-r from-purple-800 via-blue-800 to-indigo-700 min-h-full'>
+  <div class='bg-white h-full'>
     <div class="mx-auto py-2 container">
-      <p class='text-white'>全{{ $posts->count() }}件</p>
+      
+      <div class='flex between w-full'>
+        <div class='font-semibold'>いいねした投稿</div>
+        <div>{{ $posts->count() }}件</div>
+      </div>
       @foreach($posts as $post)
       <div class="rounded border bg-white hover:bg-gray-100 p-3">
         <p class='hover:text-red-500 w-fit'><a href="/categories/{{ $post->category->id }}">カテゴリー：{{
