@@ -24,6 +24,7 @@ class PostController extends Controller
         $categories = $category->getLists();
         $difficulty = new Difficulty;
         $difficulties = $difficulty->getLists();
+        $tag = $request->input('tag');
         $searchWord = $request->input('searchWord');
         $categoryId = $request->input('categoryId');
         $difficultyId = $request->input('difficultyId');
@@ -36,6 +37,7 @@ class PostController extends Controller
             'posts' => $post->getPaginateByLimit(),
             'categories' => $categories,
             'difficulties' => $difficulties,
+            'tag' => $tag,
             'searchWord' => $searchWord,
             'categoryId' => $categoryId,
             'difficultyId' => $difficultyId,
@@ -58,31 +60,24 @@ class PostController extends Controller
         return view('posts.create')->with([
             'categories' => $category->get(),
             'difficulties' => $difficulty->get(),
-            //'users' => $user->get()
         ]);
     }
     //投稿をDBに保存して投稿一覧へリダイレクト
     public function store(PostRequest $request, Post $post)
     {
-        // #タグで始まる単語を取得し、結果を$matchに多次元配列で代入
-        preg_match_all('/#([a-zA-z0-9０-９ぁ-んァ-ヶ亜-熙]+)/u', $request->tags, $match);
-        //$match[0]に#あり、$match[1]に#なしの結果が入ってくるので、$match[1]で#なしの結果のみ使う
-        $tags = [];
-        foreach ($match[1] as $tag){
-            $record = Tag::firstOrCreate(['name' => $tag]);//firstOrCreateメソッドで。tags_tableのnameに該当のない$tagは新規登録
-            array_push($tags, $record);//$recordを配列に追加
-        };
-        
-        //投稿に紐付けされるタグのidを配列化
-        $tags_id = [];
-        foreach ($tags as $tag) {
-            array_push($tags_id, $tag['id']);
-        };
-        
         $input = $request['post'];
         $post->user_id = Auth::id();
         $post->fill($input)->save();
-        $post->tags()->attach($tags_id);// 投稿ににタグ付するために、attachメソッドをつかい、モデルを結びつけている中間テーブルにレコードを挿入
+        //●ハッシュタグの保存
+        $post_body = $post->body;
+        $tags = [];
+        preg_match_all('/#([a-zA-Z0-9０-９ぁ-んァ-ヶー一-龠]+)/u', $post_body, $tags);//正規表現を用いてハッシュタグを見つけて配列($tags)に入れる。
+        foreach ($tags[1] as $tag) {
+            $tag = ltrim($tag, '#'); //先頭の`#`を削除。
+            $tag = Tag::firstOrCreate(['name' => $tag]); //すでにtagテーブルにある場合はfirst、なければcreateする。
+            $post->tags()->attach($tag); //postと紐づけて保存。
+            // 投稿ににタグ付するために、attachメソッドをつかい、モデルを結びつけている中間テーブルにレコードを挿入
+        }
 
         return redirect('/posts/' . $post->id);
     }
@@ -90,12 +85,20 @@ class PostController extends Controller
     public function search(Request $request)
     {
         // 入力される値
+        $tag = $request->input('tag');//ハッシュタグの値
         $searchWord = $request->input('searchWord');//タイトルの値
         $categoryId = $request->input('categoryId');//カテゴリの値
         $difficultyId = $request->input('difficultyId');//難易度の値
         
         $query = Post::query();
-        //入力された時Postテーブルから一致する投稿を$queryに代入
+        // 入力されたハッシュタグを持つ投稿を$queryに代入
+        if(isset($tag)) {
+            // postsテーブルとリレーションを持つtagsテーブルのnameカラムに対して曖昧検索をする
+            $query = Post::whereHas('tags', function ($query) use ($tag) {
+                $query->where('name', 'like', '%' . $tag . '%');
+            });
+        }
+        //入力された時postsテーブルから一致する投稿を$queryに代入
         if(isset($searchWord)) {
             $query->where('title', 'like', '%' . self::escapeLike($searchWord) . '%');
         }
@@ -123,6 +126,7 @@ class PostController extends Controller
             'posts' => $posts,
             'categories' => $categories,
             'difficulties' => $difficulties,
+            'tag' => $tag,
             'searchWord' => $searchWord,
             'categoryId' => $categoryId,
             'difficultyId' => $difficultyId,

@@ -36,12 +36,6 @@
             value="{{ old('post.title') }}" />
           <p class="title_error" style="color:red">{{ $errors->first('post.title') }}</p>
         </div>
-        {{--
-        <!--タグ-->
-        <div class="border rounded bg-white">
-          <input class='w-full border-none' type="text" name="tags" placeholder="#タグを付けましょう" value"{{ old('tags') }}" />
-          <p class="tag_error">{{ $errors->first('tags') }}</p>
-        </div>--}}
         <!--本文-->
         <div class="border rounded bg-white">
           <textarea class='resize-none h-1/3 w-full border-gray-300' name="post[body]"
