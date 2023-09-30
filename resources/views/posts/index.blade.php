@@ -23,21 +23,21 @@
         </div>
       </div>
       <!--検索フォーム-->
-      <form class="" id='searchForm' style='display:none;' method="GET" action="{{ route('searchpost')}}">
+      <form class="bg-gray-100 py-4" id='searchForm' style='display:none;' method="GET" action="{{ route('searchpost')}}">
         <!--ハッシュタグ検索-->
-        <div>
+        <div class='py-2'>
           <label class='p-5'>ハッシュタグ検索</label>
-          <input type'text' name='tag' value='{{ $tag }}'>
+          <input type'text' name='tag' value='{{ $tag }}' placeholder='#初心者'>
         </div>
         <!--タイトル検索-->
-        <div>
+        <div class='py-2'>
           <label class="p-5">タイトル検索</label>
-          <input type="text" class="" name="searchWord" value="{{ $searchWord }}">
+          <input type="text" name="searchWord" value="{{ $searchWord }}" placeholder='タイトル'>
         </div>
         <!--プルダウンカテゴリ選択-->
-        <div>
+        <div class='py-2'>
           <label class="p-5">カテゴリ</label>
-          <select name="categoryId" class="" value="{{ $categoryId }}">
+          <select name="categoryId" value="{{ $categoryId }}">
             <option value="">未選択</option>
 
             @foreach($categories as $id => $category_name)
@@ -48,7 +48,7 @@
           </select>
         </div>
         <!--プルダウン難易度選択-->
-        <div>
+        <div class='py-2'>
           <label class="p-5">難易度</label>
           <select name="difficultyId" class="form-control" value="{{ $difficultyId }}">
             <option value="">未選択</option>
@@ -69,6 +69,14 @@
       <p class='text-white'>全{{ $posts->count() }}件</p>
       @foreach($posts as $post)
       <div class="rounded border bg-white hover:bg-gray-100 p-3">
+        <div class='flex text-sm'>
+          <div class=''>
+            {{ $post->user->name }}
+          </div>
+          <div class='px-3'>
+            {{ $post->created_at }}
+          </div>
+        </div>
         <a href="/categories/{{ $post->category->id }}">
           <p class='hover:text-red-500'>カテゴリー：{{ $post->category->name }}</p>
         </a>

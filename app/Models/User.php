@@ -51,4 +51,14 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Post::class);
     }
+    // repliesテーブルとのリレーション
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
+    }
+    // commentsテーブルとのリレーション
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

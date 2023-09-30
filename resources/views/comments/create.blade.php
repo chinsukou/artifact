@@ -11,6 +11,14 @@
       <h1 class='font-semibold'>コメント作成</h1>
       <div class='border rounded bg-white p-3'>
         <!--コメント対象の投稿-->
+        <div class='flex text-sm'>
+          <div class=''>
+            {{ $reply->post->user->name }}
+          </div>
+          <div class='px-3'>
+            {{ $reply->post->created_at }}
+          </div>
+        </div>
         <h2>{{ $reply->post->title }}</h2>
         <p>{{ $reply->post->body }}</p>
         @auth
@@ -30,11 +38,27 @@
       </div>
       <div class='border rounded bg-white p-3'>
         <!--コメント対象の返信-->
+        <div class='flex text-sm'>
+          <div class=''>
+            {{ $reply->user->name }}
+          </div>
+          <div class='px-3'>
+            {{ $reply->created_at }}
+          </div>
+        </div>
         <p>{{ $reply->body }}</p>
       </div>
       <!--コメント一覧表示-->
       @foreach($comments as $comment)
       <div class="border rounded bg-white p-3">
+        <div class='flex text-sm'>
+          <div class=''>
+            {{ $comment->user->name }}
+          </div>
+          <div class='px-3'>
+            {{ $comment->created_at }}
+          </div>
+        </div>
         <p>{{ $comment->body }}</p>
       </div>
       @endforeach

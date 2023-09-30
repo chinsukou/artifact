@@ -23,11 +23,17 @@ class Reply extends Model
     {
         return $this->belongsTo(Post::class);
     }
-    // // commentsテーブルとのリレーション
-    // public function comments()
-    // {
-    //     return $this->hasMany(Comment::class);
-    // }
+    // commentsテーブルとのリレーション
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+    // usersテーブルとのリレーション
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     
      protected $fillable = [
         'body',
