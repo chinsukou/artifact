@@ -10,6 +10,14 @@
   <div class='bg-white h-full'>
     <div class='mx-auto py-2 container'>
       <div class="border rounded bg-white p-3">
+        <div class='flex text-sm'>
+          <div class=''>
+            {{ $post->user->name }}
+          </div>
+          <div class='px-3'>
+            {{ $post->created_at }}
+          </div>
+        </div>
         <!--カテゴリー-->
         <a fref="">{{ $post->category->name }}</a>
         <br>
@@ -46,15 +54,19 @@
       </div>
       <!--返信一覧表示-->
       <h3 class='font-semibold p-4'>返信一覧</h3>
-      @foreach($post->replies as $reply)
+      @foreach($replies as $reply)
       <div class="rounded border bg-white hover:bg-gray-100 p-3">
-        <div class="content">
-          <div class="content_contents">
-            <a href='/replies/{{ $reply->id }}'>
-              <p>{{ $reply->body }}</p>
-            </a>
+        <div class='flex text-sm'>
+          <div class=''>
+            {{ $reply->user->name }}
+          </div>
+          <div class='px-3'>
+            {{ $reply->created_at }}
           </div>
         </div>
+        <a href='/replies/{{ $reply->id }}'>
+          <p>{{ $reply->body }}</p>
+        </a>
       </div>
       @endforeach
       <div class="rounded bg-blue-500 hover:bg-blue-700 text-white w-fit">

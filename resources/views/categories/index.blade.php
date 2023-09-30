@@ -13,6 +13,14 @@
       <div class='font-semibold'>{{ $category->name }}カテゴリ</div>
       @foreach ($posts as $post)
       <div class='rounded border bg-white hover:bg-gray-100 p-3'>
+        <div class='flex text-sm'>
+          <div class=''>
+            {{ $post->user->name }}
+          </div>
+          <div class='px-3'>
+            {{ $post->created_at }}
+          </div>
+        </div>
         <p><a href="/categories/{{ $post->category->id }}">カテゴリー：{{ $post->category->name }}</a></p>
         <p><a href="/difficulties/{{ $post->difficulty->id }}">難易度：{{ $post->difficulty->name }}</a></p>
         <a href="/posts/{{ $post->id }}">

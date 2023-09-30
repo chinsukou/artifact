@@ -12,6 +12,14 @@
       <div class='font-semibold'>返信作成</div>
       <div class='border rounded bg-white p-3'>
         <!--返信対象の投稿-->
+        <div class='flex text-sm'>
+          <div class=''>
+            {{ $post->user->name }}
+          </div>
+          <div class='px-3'>
+            {{ $post->created_at }}
+          </div>
+        </div>
         <h1>{{ $post->title }}</h1>
         <p>{{ $post->body }}</p>
         @auth

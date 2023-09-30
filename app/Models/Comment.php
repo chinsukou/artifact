@@ -18,6 +18,12 @@ class Comment extends Model
     {
         return $this->belongsTo(Reply::class);
     }
+    // usersテーブルとのリレーション
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    
     protected $fillable = [
         'body',
         'user_id',
