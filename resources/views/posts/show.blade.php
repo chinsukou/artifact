@@ -14,9 +14,6 @@
           <div class=''>
             {{ $post->user->name }}
           </div>
-          <div class='px-3'>
-            {{ $post->created_at }}
-          </div>
         </div>
         <!--カテゴリー-->
         <a fref="">{{ $post->category->name }}</a>
@@ -30,6 +27,11 @@
         <!--本文-->
         <div class="content_post">
           <p>{{ $post->body }}</p>
+        <div class='flex justify-between'>
+          <div class='text-sm'>
+              {{ $post->created_at }}
+          </div>
+          <div class=''>
           @auth
           <!-- Post.phpに作ったisLikedByメソッドをここで使用 -->
           @if (!$post->isLikedBy(Auth::user()))
@@ -39,11 +41,13 @@
           </span><!-- /.likes -->
           @else
           <span class="likes">
-            <i class="fas fa-heart heart like-toggle liked" data-post-id="{{ $post->id }}"></i>
+            <i class="fas fa-heart like-toggle liked" data-post-id="{{ $post->id }}"></i>
             <span class="like-counter">{{$post->likes_count}}</span>
           </span><!-- /.likes -->
           @endif
           @endauth
+          </div>
+        </div>
         </div>
       </div>
       <!--返信-->
@@ -60,13 +64,13 @@
           <div class=''>
             {{ $reply->user->name }}
           </div>
-          <div class='px-3'>
-            {{ $reply->created_at }}
-          </div>
         </div>
         <a href='/replies/{{ $reply->id }}'>
           <p>{{ $reply->body }}</p>
         </a>
+        <div class='text-sm'>
+          {{ $reply->created_at }}
+        </div>
       </div>
       @endforeach
       <div class="rounded bg-blue-500 hover:bg-blue-700 text-white w-fit">

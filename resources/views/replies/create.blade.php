@@ -12,30 +12,45 @@
       <div class='font-semibold'>返信作成</div>
       <div class='border rounded bg-white p-3'>
         <!--返信対象の投稿-->
-        <div class='flex text-sm'>
+       <div class='flex text-sm'>
           <div class=''>
             {{ $post->user->name }}
           </div>
-          <div class='px-3'>
-            {{ $post->created_at }}
+        </div>
+        <!--カテゴリー-->
+        <a fref="">{{ $post->category->name }}</a>
+        <br>
+        <!--難易度-->
+        <a fref="">{{ $post->difficulty->name }}</a>
+        <!--タイトル-->
+        <h1 class="title">
+          {{ $post->title }}
+        </h1>
+        <!--本文-->
+        <div class="content_post">
+          <p>{{ $post->body }}</p>
+        <div class='flex justify-between'>
+          <div class='text-sm'>
+              {{ $post->created_at }}
+          </div>
+          <div class=''>
+          @auth
+          <!-- Post.phpに作ったisLikedByメソッドをここで使用 -->
+          @if (!$post->isLikedBy(Auth::user()))
+          <span class="likes">
+            <i class="fas fa-heart like-toggle" data-post-id="{{ $post->id }}"></i>
+            <span class="like-counter">{{$post->likes_count}}</span>
+          </span><!-- /.likes -->
+          @else
+          <span class="likes">
+            <i class="fas fa-heart like-toggle liked" data-post-id="{{ $post->id }}"></i>
+            <span class="like-counter">{{$post->likes_count}}</span>
+          </span><!-- /.likes -->
+          @endif
+          @endauth
           </div>
         </div>
-        <h1>{{ $post->title }}</h1>
-        <p>{{ $post->body }}</p>
-        @auth
-        <!-- Post.phpに作ったisLikedByメソッドをここで使用 -->
-        @if (!$post->isLikedBy(Auth::user()))
-        <span class="likes">
-          <i class="fas fa-heart like-toggle" data-post-id="{{ $post->id }}"></i>
-          <span class="like-counter">{{$post->likes_count}}</span>
-        </span><!-- /.likes -->
-        @else
-        <span class="likes">
-          <i class="fas fa-heart heart like-toggle liked" data-post-id="{{ $post->id }}"></i>
-          <span class="like-counter">{{$post->likes_count}}</span>
-        </span><!-- /.likes -->
-        @endif
-        @endauth
+        </div>
       </div>
       <form action="/posts/show/{{ $post->id }}" method="POST">
         @csrf

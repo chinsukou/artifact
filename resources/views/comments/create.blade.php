@@ -15,26 +15,30 @@
           <div class=''>
             {{ $reply->post->user->name }}
           </div>
-          <div class='px-3'>
-            {{ $reply->post->created_at }}
-          </div>
         </div>
         <h2>{{ $reply->post->title }}</h2>
         <p>{{ $reply->post->body }}</p>
-        @auth
-        <!-- Post.phpに作ったisLikedByメソッドをここで使用 -->
-        @if (!$reply->post->isLikedBy(Auth::user()))
-        <span class="likes">
-          <i class="fas fa-heart like-toggle" data-post-id="{{ $reply->post->id }}"></i>
-          <span class="like-counter">{{$reply->post->likes_count}}</span>
-        </span><!-- /.likes -->
-        @else
-        <span class="likes">
-          <i class="fas fa-heart heart like-toggle liked" data-post-id="{{ $reply->post->id }}"></i>
-          <span class="like-counter">{{$reply->post->likes_count}}</span>
-        </span><!-- /.likes -->
-        @endif
-        @endauth
+        <div class='flex justify-between'>
+          <div class='text-sm'>
+              {{ $reply->post->created_at }}
+          </div>
+          <div class=''>
+          @auth
+          <!-- Post.phpに作ったisLikedByメソッドをここで使用 -->
+          @if (!$post->isLikedBy(Auth::user()))
+          <span class="likes">
+            <i class="fas fa-heart like-toggle" data-post-id="{{ $post->id }}"></i>
+            <span class="like-counter">{{$post->likes_count}}</span>
+          </span><!-- /.likes -->
+          @else
+          <span class="likes">
+            <i class="fas fa-heart like-toggle liked" data-post-id="{{ $post->id }}"></i>
+            <span class="like-counter">{{$post->likes_count}}</span>
+          </span><!-- /.likes -->
+          @endif
+          @endauth
+          </div>
+        </div>
       </div>
       <div class='border rounded bg-white p-3'>
         <!--コメント対象の返信-->
@@ -42,11 +46,11 @@
           <div class=''>
             {{ $reply->user->name }}
           </div>
-          <div class='px-3'>
-            {{ $reply->created_at }}
-          </div>
         </div>
         <p>{{ $reply->body }}</p>
+        <div class='text-sm'>
+          {{ $reply->created_at }}
+        </div>
       </div>
       <!--コメント一覧表示-->
       @foreach($comments as $comment)
@@ -55,11 +59,11 @@
           <div class=''>
             {{ $comment->user->name }}
           </div>
-          <div class='px-3'>
-            {{ $comment->created_at }}
-          </div>
         </div>
         <p>{{ $comment->body }}</p>
+        <div class='text-sm'>
+          {{ $comment->created_at }}
+        </div>
       </div>
       @endforeach
       <form action="/replies/show/{{ $reply->id }}" method="POST">
