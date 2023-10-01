@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('title',100);
             $table->string('body',1000);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

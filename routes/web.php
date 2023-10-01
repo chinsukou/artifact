@@ -13,6 +13,7 @@ use App\Http\Controllers\LikeController;
 Route::controller(PostController::class)->middleware(['auth', 'verified'])->group(function(){
     Route::get('/posts/create', 'create')->name('post.create');
     Route::post('/posts', 'store')->name('post.store');
+    Route::delete('/posts/{post}', 'delete')->name('post.delete');
 });
 
 Route::controller(PostController::class)->group(function(){
@@ -28,11 +29,12 @@ Route::controller(PostController::class)->group(function(){
 // 返信用コントローラー
 Route::controller(ReplyController::class)->middleware(['auth', 'verified'])->group(function(){
     Route::get('/replies/create/{post}', 'create')->name('reply.create');
-    Route::get('/replies/{reply}', 'show')->name('reply.show');
     Route::post('/posts/show/{post}', 'store')->name('reply.store');
- 
 });
 
+Route::controller(ReplyController::class)->group(function(){
+    Route::get('/replies/{reply}', 'show')->name('reply.show');
+});
 // 個別返信用コントローラー
 Route::controller(CommentController::class)->middleware(['auth', 'verified'])->group(function(){
     Route::get('/comments/create/{reply}', 'create')->name('comment.create');
@@ -40,7 +42,7 @@ Route::controller(CommentController::class)->middleware(['auth', 'verified'])->g
 });
 
 // カテゴリ用コントローラー
-Route::get('/categories/{category}', [CategoryController::class,'index'])->middleware(['auth', 'verified'])->name('category.index');
+Route::get('/categories/{category}', [CategoryController::class,'index'])->name('category.index');
 
 // いいね用コントローラー
 Route::get('/likes', [LikeController::class,'index'])->middleware(['auth', 'verified'])->name('like.index');
