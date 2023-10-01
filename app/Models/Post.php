@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
     use HasFactory;
+    use SoftDeletes;
     public function getPaginateByLimit(int $limit_count = 10)
     {
         return $this::withCount('likes')->with('category')->orderBy('updated_at','DESC')->paginate($limit_count);
@@ -26,7 +28,6 @@ class Post extends Model
     public function isLikedBy($user): bool {
         return Like::where('user_id', $user->id)->where('post_id', $this->id)->first() !==null;
     }
-    //
     public function likes()
     {
         return $this->hasMany(Like::class);

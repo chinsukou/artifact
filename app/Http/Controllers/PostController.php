@@ -82,6 +82,12 @@ class PostController extends Controller
 
         return redirect('/posts/' . $post->id);
     }
+    // 投稿削除
+    public function delete(Post $post)
+    {
+        $post->delete();
+        return redirect('/');
+    }
     //検索メソッド
     public function search(Request $request)
     {
