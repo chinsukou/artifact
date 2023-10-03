@@ -2,7 +2,16 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-
+  <style>
+    .link {
+      color: #3B82F6;
+      position: relative;
+      z-index: 0;
+    }
+    .link:hover {
+      color: #1D4ED8;
+    }
+  </style>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
@@ -69,11 +78,12 @@
       @if (!empty($posts))
       <p class='text-white'>全{{ $posts->count() }}件</p>
       @foreach($posts as $post)
-      <div class="rounded border bg-white hover:bg-gray-100 p-3">
+      <div class="rounded border bg-white hover:bg-gray-100">
         <div class='flex justify-between h-fit'>
           <div class='text-sm h-fit'>
             {{ $post->user->name }}
           </div>
+          <!--ゴミ箱-->
           <div class='h-5'>
           @auth
           @if($post->user_id == Auth::user()->id)
@@ -92,14 +102,15 @@
           @endauth
           </div>
         </div>
-        <a href="/categories/{{ $post->category->id }}">
+        <a href="/categories/{{ $post->category->id }}" class='relative z-20'>
           <p class='hover:text-red-500'>カテゴリー：{{ $post->category->name }}</p>
         </a>
-        <a href="/posts/{{ $post->id }}">
           <p>難易度：{{ $post->difficulty->name }}</p>
+        <a href="/posts/{{ $post->id }}" class='relative z-10'>
           <h2 class='title font-bold'>{{ $post->title }}</h2>
-          <p class='body'>{{ $post->body }}</p>
         </a>
+          <!--リンク改行を有効にして$post->bodyを表示する-->
+          <p>{!! nl2br($post->makeLink($post->body)) !!}</p>
         <div class='flex justify-between'>
           <div class='text-sm'>
               {{ $post->created_at }}
@@ -132,7 +143,9 @@
       @endif
     </div>
   </div>
+  <!--検索フォームの表示・非表示-->
   <script src="{{ asset('js/app.js') }}"></script>
+  <!--削除確認-->
   <script>
     function deletePost(id) {
       'use strict'

@@ -2,14 +2,24 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-
+  <style>
+    .link {
+      color: #3B82F6;
+    }
+    .link:hover {
+      color: #1D4ED8;
+    }
+    .rep {
+      display: block;
+    }
+  </style>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 <x-app-layout>
   <div class='bg-white h-full'>
     <div class='mx-auto py-2 container'>
-      <div class="border rounded bg-white p-3">
+      <div class="border rounded bg-white hover:bg-gray-100 p-3">
         <div class='flex text-sm'>
           <div class=''>
             {{ $post->user->name }}
@@ -25,9 +35,9 @@
           {{ $post->title }}
         </h1>
         <!--本文-->
-        <div class="content_post">
-          <p>{{ $post->body }}</p>
-        <div class='flex justify-between'>
+          <!--リンク改行を有効にして$post->bodyを表示する-->
+          <p>{!! nl2br($post->makeLink(e($post->body))) !!}</p>
+          <div class='flex justify-between'>
           <div class='text-sm'>
               {{ $post->created_at }}
           </div>
@@ -48,7 +58,6 @@
           @endauth
           </div>
         </div>
-        </div>
       </div>
       <!--返信-->
       <div class='flex justify-end p-4'>
@@ -59,15 +68,18 @@
       <!--返信一覧表示-->
       <h3 class='font-semibold p-4'>返信一覧</h3>
       @foreach($replies as $reply)
-      <div class="rounded border bg-white hover:bg-gray-100 p-3">
+      <div class="rounded border bg-white hover:bg-gray-100 w-full p-3">
         <div class='flex text-sm'>
           <div class=''>
             {{ $reply->user->name }}
           </div>
         </div>
-        <a href='/replies/{{ $reply->id }}'>
-          <p>{{ $reply->body }}</p>
+          <!--リンク改行を有効にして$post->bodyを表示する-->
+          <p>
+        <a href='/replies/{{ $reply->id }}' class='rep'>
+            {!! nl2br($post->makeLink(e($reply->body))) !!}
         </a>
+            </p>
         <div class='text-sm'>
           {{ $reply->created_at }}
         </div>

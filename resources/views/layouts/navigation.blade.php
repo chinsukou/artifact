@@ -110,6 +110,9 @@
         <x-responsive-nav-link :href="route('post.index')">
           {{ __('ホーム') }}
         </x-responsive-nav-link>
+        <x-responsive-nav-link :href="route('post.create')">
+          {{ __('投稿作成') }}
+        </x-responsive-nav-link>
         <x-responsive-nav-link :href="route('profile.edit')">
           {{ __('プロフィール') }}
         </x-responsive-nav-link>

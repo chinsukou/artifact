@@ -22,8 +22,10 @@ class Post extends Model
         'user_id',
         'tag_id'
     ];
-    
-    
+    //正規表現でURLの条件を取得する
+    public function makeLink($value) {
+        return mb_ereg_replace("(https?)(://[[:alnum:]\+\$\;\?\.%,!#~*/:@&=_-]+)" , '<a href="\1\2" class="link">\1\2</a>' , $value);
+    }
     // Viewで使う、いいねされているかを判定するメソッド。
     public function isLikedBy($user): bool {
         return Like::where('user_id', $user->id)->where('post_id', $this->id)->first() !==null;

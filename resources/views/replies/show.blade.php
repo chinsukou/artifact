@@ -2,7 +2,14 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-
+  <style>
+    .link {
+      color: #3B82F6;
+    }
+    .link:hover {
+      color: #1D4ED8;
+    }
+  </style>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
@@ -18,8 +25,9 @@
           </div>
         </div>
         <p>{{ $post->title }}</p>
-        <p>{{ $post->body }}</p>
-        <div class='flex justify-between'>
+          <!--リンク改行を有効にして$post->bodyを表示する-->
+          <p>{!! nl2br($post->makeLink(e($post->body))) !!}</p>
+          <div class='flex justify-between'>
           <div class='text-sm'>
               {{ $reply->post->created_at }}
           </div>
@@ -48,8 +56,9 @@
             {{ $reply->user->name }}
           </div>
         </div>
-        <p>{{ $reply->body }}</p>
-        <div class='text-sm'>
+          <!--リンク改行を有効にして$post->bodyを表示する-->
+          <p>{!! nl2br($post->makeLink(e($reply->body))) !!}</p>
+          <div class='text-sm'>
           {{ $reply->created_at }}
         </div>
       </div>
@@ -61,8 +70,9 @@
             {{ $comment->user->name }}
           </div>
         </div>
-        <p>{{ $comment->body }}</p>
-        <div class='text-sm'>
+          <!--リンク改行を有効にして$post->bodyを表示する-->
+          <p>{!! nl2br($post->makeLink(e($comment->body))) !!}</p>
+          <div class='text-sm'>
           {{ $comment->created_at }}
         </div>
       </div>

@@ -2,7 +2,14 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-
+  <style>
+    .link {
+      color: #3B82F6;
+    }
+    .link:hover {
+      color: #1D4ED8;
+    }
+  </style>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
@@ -46,7 +53,8 @@
         <p>難易度：{{ $post->difficulty->name }}</p>
         <a href="/posts/{{ $post->id }}">
           <h2 class='title font-bold'>{{ $post->title }}</h2>
-          <p class='body'>{{ $post->body }}</p>
+          <!--リンク改行を有効にして$post->bodyを表示する-->
+          <p>{!! nl2br($post->makeLink(e($post->body))) !!}</p>
         </a>
         <div class='flex justify-between'>
           <div class='text-sm'>
