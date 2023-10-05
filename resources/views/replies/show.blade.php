@@ -6,6 +6,7 @@
     .link {
       color: #3B82F6;
     }
+
     .link:hover {
       color: #1D4ED8;
     }
@@ -15,66 +16,52 @@
 </head>
 <x-app-layout>
   <div class='bg-white h-full'>
-    <div class='mx-auto py-2 container'>
-      <!--カテゴリー-->
-      <!--本文-->
-      <div class="rounded border bg-white p-3">
-        <div class='flex text-sm'>
-          <div class=''>
-            {{ $post->user->name }}
-          </div>
+    <div class='mx-auto px-5 py-2 container'>
+      <!--投稿-->
+      <div class="border-2 rounded-lg border-gray-200 p-3 mb-2">
+        <h1 class='text-xl title-font font-medium mb-2'>{{ $post->title }}</h1>
+        <div class='flex text-sm text-gray-500 mb-4'>
+          <h2 class='ml-2'>{{ $post->user->name }}</h2>
+          <h2 class='ml-2'>カテゴリー：{{ $post->category->name }}</h2>
+          <h2 class='ml-2'>難易度：{{ $post->difficulty->name }}</h2>
         </div>
-        <p>{{ $post->title }}</p>
-          <!--リンク改行を有効にして$post->bodyを表示する-->
-          <p>{!! nl2br($post->makeLink(e($post->body))) !!}</p>
-          <div class='flex justify-between'>
-          <div class='text-sm'>
-              {{ $reply->post->created_at }}
-          </div>
+        <!--リンク改行を有効にして$post->bodyを表示する-->
+        <p class=''>{!! nl2br($post->makeLink(e($post->body))) !!}</p>
+        <img class='w-full object-cover object-center my-2' src='https://dummyimage.com/720x400' alt='画像'>
+        <div class='flex justify-between'>
+          <div class='text-sm text-gray-400'>{{ $post->created_at }}</div>
           <div class=''>
-          @auth
-          <!-- Post.phpに作ったisLikedByメソッドをここで使用 -->
-          @if (!$post->isLikedBy(Auth::user()))
-          <span class="likes">
-            <i class="fas fa-heart like-toggle" data-post-id="{{ $post->id }}"></i>
-            <span class="like-counter">{{$post->likes_count}}</span>
-          </span><!-- /.likes -->
-          @else
-          <span class="likes">
-            <i class="fas fa-heart like-toggle liked" data-post-id="{{ $post->id }}"></i>
-            <span class="like-counter">{{$post->likes_count}}</span>
-          </span><!-- /.likes -->
-          @endif
-          @endauth
+            @auth
+            <!-- Post.phpに作ったisLikedByメソッドをここで使用 -->
+            @if (!$post->isLikedBy(Auth::user()))
+            <span class="likes">
+              <i class="fas fa-heart like-toggle" data-post-id="{{ $post->id }}"></i>
+              <span class="like-counter">{{$post->likes_count}}</span>
+            </span><!-- /.likes -->
+            @else
+            <span class="likes">
+              <i class="fas fa-heart like-toggle liked" data-post-id="{{ $post->id }}"></i>
+              <span class="like-counter">{{$post->likes_count}}</span>
+            </span><!-- /.likes -->
+            @endif
+            @endauth
           </div>
         </div>
       </div>
       <!--返信-->
-      <div class="rounded border bg-white p-3">
-        <div class='flex text-sm'>
-          <div class=''>
-            {{ $reply->user->name }}
-          </div>
-        </div>
-          <!--リンク改行を有効にして$post->bodyを表示する-->
-          <p>{!! nl2br($post->makeLink(e($reply->body))) !!}</p>
-          <div class='text-sm'>
-          {{ $reply->created_at }}
-        </div>
+      <div class="border-2 rounded-lg border-gray-200 p-3 mb-2">
+        <div class='text-gray-400 mb-2'>{{ $reply->user->name }}</div>
+        <!--リンク改行を有効にして$post->bodyを表示する-->
+        <p class='mb-2'>{!! nl2br($post->makeLink(e($reply->body))) !!}</p>
+        <div class='text-sm text-gray-400'>{{ $reply->created_at }}</div>
       </div>
       <!--コメント一覧表示-->
       @foreach($comments as $comment)
-      <div class="rounded border bg-white p-3">
-        <div class='flex text-sm'>
-          <div class=''>
-            {{ $comment->user->name }}
-          </div>
-        </div>
-          <!--リンク改行を有効にして$post->bodyを表示する-->
-          <p>{!! nl2br($post->makeLink(e($comment->body))) !!}</p>
-          <div class='text-sm'>
-          {{ $comment->created_at }}
-        </div>
+      <div class="border-2 rounded-lg border-gray-200 p-3 mb-2">
+        <div class='text-gray-400 mb-2'>{{ $comment->user->name }}</div>
+        <!--リンク改行を有効にして$post->bodyを表示する-->
+        <p class='mb-2'>{!! nl2br($post->makeLink(e($comment->body))) !!}</p>
+        <div class='text-sm text-gray-400'>{{ $comment->created_at }}</div>
       </div>
       @endforeach
       <div class='flex justify-end p-4'>
@@ -82,7 +69,7 @@
           <a href='/comments/create/{{ $reply->id }}'>コメントする</a>
         </div>
       </div>
-      <div class="rounded bg-blue-500 hover:bg-blue-700 text-white w-fit">
+      <div class="rounded bg-blue-500 hover:bg-blue-700 text-white w-fit mt-2">
         <a href="/posts/{{ $post->id }}">戻る</a>
       </div>
     </div>
