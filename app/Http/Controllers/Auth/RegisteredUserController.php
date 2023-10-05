@@ -46,11 +46,11 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return view('auth.register-receive');
+        return redirect()->route('');
     }
     // 認証メール送信後のページへ
-    // public function receive()
-    // {
-    //     return view('auth.register-receive');
-    // }
+    public function receive()
+    {
+        return view('auth.register-receive');
+    }
 }
