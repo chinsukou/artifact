@@ -17,7 +17,7 @@ Route::controller(PostController::class)->middleware(['auth', 'verified'])->grou
 });
 
 Route::controller(PostController::class)->group(function(){
-    Route::get('/', 'index')->name('post.index');
+    Route::get('/', 'welcome')->name('welcome');
     Route::get('/posts', 'index')->name('post.index');
     //検索用
     Route::get('/searchpost', 'search')->name('searchpost');

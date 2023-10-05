@@ -33,9 +33,6 @@ Route::middleware('guest')->group(function () {
 
     Route::post('reset-password', [NewPasswordController::class, 'store'])
                 ->name('password.store');
-    // // 認証メール送った後のページ
-    // Route::get('register-receive', [RegisteredUserController::class, 'receive'])
-    //             ->name('receive');
 });
 
 Route::middleware('auth')->group(function () {

@@ -80,7 +80,7 @@
       </div>
       @endforeach
       <div class="rounded bg-blue-500 hover:bg-blue-700 text-white w-fit mt-2">
-        <a href="/">戻る</a>
+        <a href="/posts">戻る</a>
       </div>
     </div>
   </div>

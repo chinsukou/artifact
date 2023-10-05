@@ -16,6 +16,11 @@ use App\Models\Tag;
 
 class PostController extends Controller
 {
+    public function welcome()
+    {
+        return view('welcome');
+    }
+    
     //投稿一覧
     public function index(Post $post, Request $request)
     {
