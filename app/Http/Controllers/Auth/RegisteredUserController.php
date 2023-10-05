@@ -46,7 +46,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('');
+        return redirect()->route('receive');
     }
     // 認証メール送信後のページへ
     public function receive()
