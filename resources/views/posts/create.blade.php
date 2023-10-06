@@ -12,7 +12,7 @@
       <h1 class='font-semibold mb-2'>投稿作成</h1>
         <div>※画像投稿は現在開発中です.ご迷惑をおかけします.</div>
       <div class='border-2 border-gray-200 rounded-lg'>
-                    <img class='lg:h-48 md:h-36 w-full object-cover object-center' src='https://dummyimage.com/720x400' alt='画像'>
+                    <img class='lg:h-48 md:h-36 w-full object-cover object-center' src='https://placehold.jp/ffffff/1e1515/720x400.png?text=stepBystep' alt='画像'>
       <form action="/posts" method="POST">
         @csrf
         <!--タイトル-->

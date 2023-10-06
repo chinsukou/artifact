@@ -8,6 +8,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DifficultyController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\UserController;
 
 // 投稿用コントローラー
 Route::controller(PostController::class)->middleware(['auth', 'verified'])->group(function(){
@@ -47,10 +48,16 @@ Route::get('/categories/{category}', [CategoryController::class,'index'])->name(
 // いいね用コントローラー
 Route::get('/likes', [LikeController::class,'index'])->middleware(['auth', 'verified'])->name('like.index');
 
+// ユーザーのプロフィール用コントローラー
+Route::controller(UserController::class)->group(function(){
+   Route::get('/user-prof/prof', 'index')->name('user.profile'); 
+});
+
 Route::middleware('auth', 'verified')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 
 require __DIR__.'/auth.php';

@@ -18,14 +18,14 @@
       <h1 class='font-semibold'>コメント作成</h1>
       <div class="border-2 rounded-lg border-gray-200 p-3 mb-3">
         <h1 class='text-xl title-font font-medium mb-2'>{{ $reply->post->title }}</h1>
-        <div class='flex text-sm text-gray-500 mb-4'>
+        <div class='text-sm text-gray-500 mb-4'>
           <h2 class='ml-2'>{{ $reply->post->user->name }}</h2>
           <h2 class='ml-2'>カテゴリー：{{ $reply->post->category->name }}</h2>
           <h2 class='ml-2'>難易度：{{ $reply->post->difficulty->name }}</h2>
         </div>
         <!--リンク改行を有効にして$post->bodyを表示する-->
         <p class=''>{!! nl2br($post->makeLink(e($reply->post->body))) !!}</p>
-        <img class='w-full object-cover object-center my-2' src='https://dummyimage.com/720x400' alt='画像'>
+        <img class='w-full object-cover object-center my-2' src='https://placehold.jp/ffffff/1e1515/720x400.png?text=stepBystep' alt='画像'>
         <div class='flex justify-between'>
           <div class='text-sm text-gray-400'>{{ $reply->post->created_at }}</div>
           <div class=''>
