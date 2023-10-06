@@ -12,7 +12,7 @@
         <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
         <!-- Styles -->
     </head>
-    <body>
+    <body class='welcome-bg'>
         <div class='container h-full mx-auto p-10'>
             <h1 class='text-4xl font-semibold font-serif text-center mb-5'>stepBystep</h1>
             <div class='tracking-wider bg-white h-2/3 overflow-y-scroll p-10 mb-5'>
