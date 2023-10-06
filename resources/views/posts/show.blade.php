@@ -21,10 +21,10 @@
 <x-app-layout>
   <div class='bg-white h-full'>
     <div class='mx-auto px-5 py-2 container'>
-      <div class="border-2 rounded-lg border-gray-200 p-3 mb-2">
+      <div class="break-all container border-2 rounded-lg border-gray-200 p-3 mb-2">
         <!--タイトル-->
         <h1 class="text-xl title-font font-medium mb-2">{{ $post->title }}</h1>
-        <div class='flex text-sm text-gray-500 mb-4'>
+        <div class='text-sm text-gray-500 mb-4'>
           <!--投稿したユーザ-->
           <h2 class='ml-2'>{{ $post->user->name }}</h2>
           <!--カテゴリー-->
@@ -35,7 +35,7 @@
         <!--本文-->
         <!--リンク改行を有効にして$post->bodyを表示する-->
         <p class=''>{!! nl2br($post->makeLink(e($post->body))) !!}</p>
-        <img class='w-full object-cover object-center my-2' src='https://dummyimage.com/720x400' alt='画像'>
+        <img class='w-full object-cover object-center my-2' src='https://placehold.jp/ffffff/1e1515/720x400.png?text=stepBystep' alt='画像'>
         <div class='flex justify-between'>
           <div class='text-sm text-gray-400'>
             {{ $post->created_at }}
