@@ -1,5 +1,6 @@
 <head>
   <meta name="csrf-token" content="{{ csrf_token() }}">
+  <title>stepBystep コメント作成</title>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
   <style>
     .link {
