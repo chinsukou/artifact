@@ -1,6 +1,5 @@
 <head>
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>stepBystep HOME</title>
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
   @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -82,19 +81,29 @@
                   </svg>
                 </a>
                 <!--いいね-->
+                <!--ログイン用-->
                 @auth
                 @if (!$post->isLikedBy(Auth::user()))
                 <span class="likes text-gray-400">
                   <i class="fas fa-heart like-toggle" data-post-id="{{ $post->id }}"></i>
-                  <span class="like-counter">{{$post->likes_count}}</span>
+                  <span class="like-counter">{{ $post->likes_count }}</span>
                 </span>
                 @else
                 <span class="likes">
                   <i class="fas fa-heart like-toggle liked" data-post-id="{{ $post->id }}"></i>
-                  <span class="like-counter">{{$post->likes_count}}</span>
+                  <span class="like-counter">{{ $post->likes_count }}</span>
                 </span>
                 @endif
                 @endauth
+                <!--ゲスト用-->
+                @if(!Auth::user())
+                <a href="{{ route('login') }}">
+                  <span class="likes text-gray-400">
+                    <i class="fas fa-heart like-toggle" data-post-id="{{ $post->id }}"></i>
+                    <span class="like-counter">{{ $post->likes_count }}</span>
+                  </span>
+                </a>
+                @endif
               </div>
             </div>
           </div>
