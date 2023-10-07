@@ -42,20 +42,30 @@
             {{ $post->created_at }}
           </div>
           <div class=''>
+            <!--いいね-->
+            <!--ログイン用-->
             @auth
-            <!-- Post.phpに作ったisLikedByメソッドをここで使用 -->
             @if (!$post->isLikedBy(Auth::user()))
-            <span class="likes">
+            <span class="likes text-gray-400">
               <i class="fas fa-heart like-toggle" data-post-id="{{ $post->id }}"></i>
-              <span class="like-counter">{{$post->likes_count}}</span>
-            </span><!-- /.likes -->
+              <span class="like-counter">{{ $post->likes_count }}</span>
+            </span>
             @else
             <span class="likes">
               <i class="fas fa-heart like-toggle liked" data-post-id="{{ $post->id }}"></i>
-              <span class="like-counter">{{$post->likes_count}}</span>
-            </span><!-- /.likes -->
+              <span class="like-counter">{{ $post->likes_count }}</span>
+            </span>
             @endif
             @endauth
+            <!--ゲスト用-->
+            @if(!Auth::user())
+            <a href="{{ route('login') }}">
+              <span class="likes text-gray-400">
+                <i class="fas fa-heart like-toggle" data-post-id="{{ $post->id }}"></i>
+                <span class="like-counter">{{ $post->likes_count }}</span>
+              </span>
+            </a>
+            @endif
           </div>
         </div>
       </div>

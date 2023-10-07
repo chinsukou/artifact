@@ -36,12 +36,12 @@
             @if (!$post->isLikedBy(Auth::user()))
             <span class="likes">
               <i class="fas fa-heart like-toggle" data-post-id="{{ $post->id }}"></i>
-              <span class="like-counter">{{$post->likes_count}}</span>
+              <span class="like-counter">{{ $post->likes_count }}</span>
             </span><!-- /.likes -->
             @else
             <span class="likes">
               <i class="fas fa-heart like-toggle liked" data-post-id="{{ $post->id }}"></i>
-              <span class="like-counter">{{$post->likes_count}}</span>
+              <span class="like-counter">{{ $post->likes_count }}</span>
             </span><!-- /.likes -->
             @endif
             @endauth
