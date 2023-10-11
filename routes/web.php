@@ -49,8 +49,9 @@ Route::get('/categories/{category}', [CategoryController::class,'index'])->name(
 Route::get('/likes', [LikeController::class,'index'])->middleware(['auth', 'verified'])->name('like.index');
 
 // ユーザーのプロフィール用コントローラー
-Route::controller(UserController::class)->group(function(){
-   Route::get('/user-prof/prof', 'index')->name('user.profile'); 
+Route::middleware('auth','verified')->group(function(){
+   Route::get('/user-prof/prof-other/{user}', [UserController::class,'index']); 
+   Route::get('/user-prof/prof', [UserController::class,'auth'])->name('user.profile'); 
 });
 
 Route::middleware('auth', 'verified')->group(function () {

@@ -11,7 +11,7 @@ class CategoryController extends Controller
     public function index(Category $category)
     {
         return view('categories.index')->with([
-            'posts' => $category->posts()->with('category')->orderBy('updated_at', 'DESC')->get(),
+            'posts' => $category->posts()->with('category')->orderBy('created_at', 'DESC')->get(),
             'category' => $category
         ]);
     }

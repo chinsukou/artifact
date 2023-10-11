@@ -17,8 +17,8 @@
                 </svg>
             </div>
             <div class='py-8 ml-4'>
-      <h2 class='text-lg mb-3'>名前：{{ Auth::user()->name }}</h2>
-      <h3>登録日：{{ Auth::user()->created_at }}</h3>
+      <h2 class='text-lg mb-3'>名前：{{ $user->name }}</h2>
+      <h3>登録日：{{ $user->created_at }}</h3>
             </div>
         </div>
         <!--投稿の表示-->

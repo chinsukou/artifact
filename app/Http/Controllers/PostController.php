@@ -91,7 +91,7 @@ class PostController extends Controller
     public function delete(Post $post)
     {
         $post->delete();
-        return redirect('/');
+        return redirect('/user-prof/prof');
     }
     //検索メソッド
     public function search(Request $request)
