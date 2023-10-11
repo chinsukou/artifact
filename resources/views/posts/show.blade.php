@@ -14,7 +14,7 @@
         <h1 class="text-xl title-font font-medium mb-2">{{ $post->title }}</h1>
         <div class='text-sm text-gray-500 mb-4'>
           <!--投稿したユーザ-->
-          <h2 class='ml-2'>{{ $post->user->name }}</h2>
+          <h2 class='ml-2'><a href='/user-prof/prof-other/{{ $post->user->id }}'>{{ $post->user->name }}</a></h2>
           <!--カテゴリー-->
           <h2 class='ml-2'>カテゴリー：{{ $post->category->name }}</h2>
           <!--難易度-->
