@@ -3,7 +3,6 @@
   <title>stepBystep 投稿作成</title>
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-
   @vite(['resources/css/app.css', 'resources/js/app.js'])
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
@@ -17,15 +16,15 @@
       <form action="/posts" method="POST">
         @csrf
         <!--タイトル-->
-        <div class="">
-          <input class='border-none w-full' type="text" name="post[title]" placeholder="タイトル"
+        <div class="my-2">
+          <input class='border-none w-full' type="text" name="post[title]" placeholder="タイトル(目的)"
             value="{{ old('post.title') }}" />
           <p class="title_error" style="color:red">{{ $errors->first('post.title') }}</p>
         </div>
-        <div class=''>
+        <div class='my-2'>
           <!--カテゴリーの選択-->
           <div>
-            <select class='border-none w-full' name="post[category_id]">
+            <select class='font-bold border-none w-full' name="post[category_id]">
               @foreach($categories as $category)
               <option value="{{ $category->id }}">カテゴリー：{{ $category->name }}</option>
               @endforeach
@@ -33,17 +32,17 @@
           </div>
           <!--難易度の選択-->
           <div class=''>
-            <select class='border-none w-full' name="post[difficulty_id]">
+            <select class='font-bold border-none w-full' name="post[difficulty_id]">
               @foreach($difficulties as $difficulty)
-              <option value="{{ $difficulty->id }}">難易度：{{ $difficulty->name }}</option>
+              <option value="{{ $difficulty->id }}">教材の難易度：{{ $difficulty->name }}</option>
               @endforeach
             </select>
           </div>
         </div>
         <!--本文-->
         <div class="">
-          <textarea class='border-none resize-none h-1/3 w-full' name="post[body]"
-            placeholder="おすすめしたい教材.当時の自分のレベルなどを投稿してください.">{{ old('post.body') }}</textarea>
+          <textarea class='border-none border-top resize-none h-1/3 w-full' name="post[body]"
+            placeholder="おすすめしたい教材.当時の自分のレベルなどを投稿してください.">#ハッシュタグをつけよう！&#13;&#10;&#13;&#10;・取り組み当時の自分のレベル&#13;&#10;&#13;&#10;・おすすめできるところ&#13;&#10;&#13;&#10;・おすすめできないところ&#13;&#10;&#13;&#10;・その他（リンクなど）{{ old('post.body') }}</textarea>
           <p class="body_error" style="color:red">{{ $errors->first('post.body') }}</p>
         </div>
       </div>

@@ -3,19 +3,6 @@
   <title>stepBystep 投稿詳細</title>
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-  <style>
-    .link {
-      color: #3B82F6;
-    }
-
-    .link:hover {
-      color: #1D4ED8;
-    }
-
-    .rep {
-      display: block;
-    }
-  </style>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>

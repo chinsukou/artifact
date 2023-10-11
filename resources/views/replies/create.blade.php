@@ -3,14 +3,6 @@
   <title>stepBystep 返信作成</title>
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-  <style>
-    .link {
-      color: #3B82F6;
-    }
-    .link:hover {
-      color: #1D4ED8;
-    }
-  </style>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
@@ -23,7 +15,7 @@
         <div class='text-sm text-gray-500 mb-4'>
           <h2 class='ml-2'>{{ $post->user->name }}</h2>
           <h2 class='ml-2'>カテゴリー：{{ $post->category->name }}</h2>
-          <h2 class='ml-2'>難易度：{{ $post->difficulty->name }}</h2>
+          <h2 class='ml-2'>教材の難易度：{{ $post->difficulty->name }}</h2>
         </div>
         <!--リンク改行を有効にして$post->bodyを表示する-->
         <p class=''>{!! nl2br($post->makeLink(e($post->body))) !!}</p>

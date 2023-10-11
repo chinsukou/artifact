@@ -13,3 +13,11 @@
 .liked {
     color: red;
 }
+
+.link {
+     color: #3B82F6;
+}
+
+.link:hover {
+      color: #1D4ED8;
+}
