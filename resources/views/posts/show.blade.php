@@ -80,7 +80,7 @@
       <!--返信一覧表示-->
       <h3 class='font-semibold p-4'>返信一覧</h3>
       @foreach($replies as $reply)
-      <div class="border-2 rounded-lg border-gray-200 p-3 mb-2">
+      <div class="break-all border-2 rounded-lg border-gray-200 p-3 mb-2">
         <div class='text-gray-400 mb-2'>
           <!--投稿したユーザ-->
           <a href='/user-prof/prof-other/{{ $reply->user->id }}'>

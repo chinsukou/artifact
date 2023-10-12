@@ -10,7 +10,7 @@
   <div class='bg-white h-full'>
     <div class='mx-auto px-5 py-2 container'>
       <div class='font-semibold'>返信作成</div>
-      <div class="border-2 rounded-lg border-gray-200 p-3 mb-3">
+      <div class="break-all border-2 rounded-lg border-gray-200 p-3 mb-3">
         <!--投稿したユーザ-->
           <a href='/user-prof/prof-other/{{ $post->user->id }}'>
         <div class='flex text-gray-500'>
@@ -55,11 +55,9 @@
           </div>
         </div>
       </div>
-      <div class="border-2 rounded-lg border-gray-200 p-3 mb-2">
-        
+      <div class="break-all border-2 rounded-lg border-gray-200 p-3 mb-2">
         <!--投稿したユーザ-->
         <div class='flex text-gray-500'>
-          
           <div class='py-2'>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                   stroke="currentColor" class="w-6 h-6">

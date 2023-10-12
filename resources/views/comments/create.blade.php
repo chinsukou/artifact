@@ -9,7 +9,7 @@
   <div class='bg-white h-full'>
     <div class='mx-auto px-5 py-2 container'>
       <h1 class='font-semibold'>コメント作成</h1>
-      <div class="border-2 rounded-lg border-gray-200 p-3 mb-3">
+      <div class="break-all border-2 rounded-lg border-gray-200 p-3 mb-3">
         <!--投稿したユーザ-->
         <a href='/user-prof/prof-other/{{ $reply->post->user->id }}'>
           <div class='flex text-gray-500'>
@@ -56,7 +56,7 @@
         </div>
       </div>
       <!--コメント対象の返信-->
-      <div class="border-2 rounded-lg border-gray-200 p-3 mb-2">
+      <div class="break-all border-2 rounded-lg border-gray-200 p-3 mb-2">
         <!--投稿したユーザ-->
         <a href='/user-prof/prof-other/{{ $reply->user->id }}'>
           <div class='flex text-gray-500'>
@@ -79,7 +79,7 @@
       </div>
       <!--コメント一覧表示-->
       @foreach($comments as $comment)
-      <div class="border-2 rounded-lg border-gray-200 p-3 mb-2">
+      <div class="break-all border-2 rounded-lg border-gray-200 p-3 mb-2">
         <!--投稿したユーザ-->
         <a href='/user-prof/prof-other/{{ $comment->user->id }}'>
           <div class='flex text-gray-500'>
