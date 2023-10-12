@@ -15,7 +15,8 @@
         @foreach ($posts as $post)
           <div class='p-4 md:w-1/3'>
             <div class='h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden hover:tansform hover:duration-1000 hover:scale-110'>
-              <img class='lg:h-48 md:h-36 w-full object-cover object-center' src='https://dummyimage.com/720x400' alt='画像'>
+            <img class='lg:h-48 md:h-36 w-full object-cover object-center'
+              src='https://placehold.jp/ffffff/1e1515/720x400.png?text=stepBystep' alt='画像'>
               <div class='p-6'>
                 <h1 class='h-8 overflow-hidden text-lg title-font font-medium text-gray-900 mb-3'>{{ $post->title }}</h1>
                 <a href='/categories/{{ $post->category->id }}'>
