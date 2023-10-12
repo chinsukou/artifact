@@ -22,7 +22,7 @@
             </div>
         </div>
         <!--投稿の表示-->
-        @if (isset($posts))
+        @if (count($posts) == 0)
         <div class='flex justify-center items-center h-80'>
             <div class='items-center'>
             <h3 class='text-gray-400 text-lg text-center'>投稿がありません</h3>

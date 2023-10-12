@@ -23,7 +23,8 @@
         </div>
       </div>
       <!--検索フォーム-->
-      <form class="bg-gray-100 py-4" id='searchForm' style='display:none;' method="GET" action="{{ route('searchpost')}}">
+      <form class="bg-gray-100 py-4" id='searchForm' style='display:none;' method="GET"
+        action="{{ route('searchpost')}}">
         <!--ハッシュタグ検索-->
         <div class='py-2'>
           <label class='p-5'>ハッシュタグ検索</label>
@@ -40,7 +41,7 @@
           <select name="categoryId" value="{{ $categoryId }}">
             <option value="">未選択</option>
             @foreach($categories as $id => $category_name)
-              <option value="{{ $id }}">{{ $category_name }}</option>
+            <option value="{{ $id }}">{{ $category_name }}</option>
             @endforeach
           </select>
         </div>
@@ -65,19 +66,24 @@
         <!--投稿の表示-->
         @foreach($posts as $post)
         <div class='p-4 md:w-1/3'>
-          <div class='h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden hover:tansform hover:duration-1000 hover:scale-110'>
-            <img class='lg:h-48 md:h-36 w-full object-cover object-center' src='https://placehold.jp/ffffff/1e1515/720x400.png?text=stepBystep' alt='画像'>
+          <div
+            class='h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden hover:tansform hover:duration-1000 hover:scale-110'>
+            <img class='lg:h-48 md:h-36 w-full object-cover object-center'
+              src='https://placehold.jp/ffffff/1e1515/720x400.png?text=stepBystep' alt='画像'>
             <div class='p-6'>
               <h1 class='h-8 overflow-hidden text-lg title-font font-medium text-gray-900 mb-3'>{{ $post->title }}</h1>
               <a href='/categories/{{ $post->category->id }}'>
-                <h2 class='text-xs title-font font-medium text-gray-400 hover:text-black mb-1'>カテゴリー：{{ $post->category->name }}</h2>
+                <h2 class='text-xs title-font font-medium text-gray-400 hover:text-black mb-1'>カテゴリー：{{
+                  $post->category->name }}</h2>
               </a>
               <h2 class='text-xs title-font font-medium text-gray-400 mb-1'>難易度：{{ $post->difficulty->name }}</h2>
               <div class='flex justify-between items-center'>
                 <a href='/posts/{{ $post->id }}' class='text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0'>
                   投稿を見る
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 ml-2">
-                    <path stroke-linecap="round" stroke-linejoin="round"  d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-4 h-4 ml-2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </a>
                 <!--いいね-->
@@ -119,15 +125,15 @@
       @endif
     </div>
   </div>
-    <!--投稿作成-->
-    <div class='fixed bottom-5 right-5'>
-      <a href="{{ route('post.create') }}">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-          stroke="currentColor" class="w-20 h-20 text-green-600 opacity-70">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      </a>
-    </div>
+  <!--投稿作成-->
+  <div class='fixed bottom-5 right-5'>
+    <a href="{{ route('post.create') }}">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+        class="w-20 h-20 text-green-600 opacity-70">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    </a>
+  </div>
   <!--検索フォームの表示・非表示-->
   <script src="{{ asset('js/app.js') }}"></script>
 </x-app-layout>
