@@ -13,6 +13,7 @@ use App\Models\Reply;
 use App\Models\Comment;
 use App\Models\Like;
 use App\Models\Tag;
+use Cloudinary;
 
 class PostController extends Controller
 {
@@ -71,10 +72,16 @@ class PostController extends Controller
     //投稿をDBに保存して投稿一覧へリダイレクト
     public function store(PostRequest $request, Post $post)
     {
+        $post = new Post();
+        //画像の保存
+        if($image = $request->file('image')){
+            //Cloudinaryに画像をアップロードしてURLを取得
+            $post->public_id = Cloudinary::upload($request->file('image')->getRealPath(),['folder' => 'images','width' => 720,'height' => 400])->getSecurePath();
+        }
         $input = $request['post'];
         $post->user_id = Auth::id();
         $post->fill($input)->save();
-        //●ハッシュタグの保存
+        //ハッシュタグの保存
         $post_body = $post->body;
         $tags = [];
         preg_match_all('/#([a-zA-Z0-9０-９ぁ-んァ-ヶー一-龠]+)/u', $post_body, $tags);//正規表現を用いてハッシュタグを見つけて配列($tags)に入れる。

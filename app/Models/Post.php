@@ -20,7 +20,8 @@ class Post extends Model
         'category_id',
         'difficulty_id',
         'user_id',
-        'tag_id'
+        'tag_id',
+        'public_id'
     ];
     //正規表現でURLの条件を取得する
     public function makeLink($value) {

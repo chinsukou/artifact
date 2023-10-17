@@ -8,34 +8,38 @@
 <x-app-layout>
   <div class='bg-white h-full'>
     <div class='container px-5 mx-auto'>
-        <div class='flex border-b border-gray-500 mb-5'>
-            <div class='text-gray-500 py-5'>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                  stroke="currentColor" class="w-24 h-24">
-                  <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-            </div>
-            <div class='py-8 ml-4'>
-      <h2 class='text-lg mb-3'>名前：{{ $user->name }}</h2>
-      <h3>登録日：{{ $user->created_at }}</h3>
-            </div>
+      <div class='flex border-b border-gray-500 mb-5'>
+        <div class='text-gray-500 py-5'>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="w-24 h-24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
         </div>
-        <!--投稿の表示-->
-        @if (count($posts) == 0)
-        <div class='flex justify-center items-center h-80'>
-            <div class='items-center'>
-            <h3 class='text-gray-400 text-lg text-center'>投稿がありません</h3>
-            </div>
+        <div class='py-8 ml-4'>
+          <h2 class='text-lg mb-3'>名前：{{ $user->name }}</h2>
+          <h3>登録日：{{ $user->created_at }}</h3>
         </div>
-        @else
+      </div>
+      <!--投稿の表示-->
+      @if (count($posts) == 0)
+      <div class='flex justify-center items-center h-80'>
+        <div class='items-center'>
+          <h3 class='text-gray-400 text-lg text-center'>投稿がありません</h3>
+        </div>
+      </div>
+      @else
       <div class='flex flex-wrap -m-4'>
         @foreach($posts as $post)
         <div class='p-4 md:w-1/3'>
           <div
             class='h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden hover:tansform hover:duration-1000 hover:scale-110'>
-            <img class='lg:h-48 md:h-36 w-full object-cover object-center'
+            @if(isset($post->public_id))
+            <img class='lg:h-48 md:h-36 w-full object-cover object-center' src='{{ $post->public_id }}' alt='画像'>
+            @else
+            <img class='w-full object-cover object-center my-2'
               src='https://placehold.jp/ffffff/1e1515/720x400.png?text=stepBystep' alt='画像'>
+            @endif
             <div class='p-6'>
               <h1 class='h-8 overflow-hidden text-lg title-font font-medium text-gray-900 mb-3'>{{ $post->title }}</h1>
               <a href='/categories/{{ $post->category->id }}'>

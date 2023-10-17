@@ -15,7 +15,7 @@
     <body class='welcome-bg'>
         <div class='container h-full mx-auto p-10'>
             <h1 class='text-4xl font-semibold font-serif text-center mb-5'>stepBystep</h1>
-            <div class='tracking-wider bg-white h-2/3 overflow-y-scroll p-10 mb-5'>
+            <div class='tracking-wider bg-white rounded-lg h-2/3 overflow-y-scroll p-10 mb-5'>
                 <p class='py-2'>stepBystepをご覧下さりありがとうございます！</p>
                 <p class='py-2'>こちらのWebアプリは、現在情報系の学部に通っている大学生が作成した自分のおすすめの教材などを共有できる掲示板です。</p>
                 <p class='text-lg font-bold py-2'>「本でもネットでも教材が多すぎてどれを選べばいいのかわからない！」</p>
@@ -30,7 +30,7 @@
             @if (Route::has('login'))
                 @auth
                 <div class='bg-white rounded-lg text-center p-2'>
-                    <a href="{{ url('/posts') }}" class="text-sm text-white bg-black">Homeへ</a>
+                    <a href="{{ url('/posts') }}" class="text-sm text-white">Homeへ</a>
                 </div>
                 @else
                     
