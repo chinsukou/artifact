@@ -37,8 +37,12 @@
         <!--本文-->
         <!--リンク改行を有効にして$post->bodyを表示する-->
         <p class=''>{!! nl2br($post->makeLink(e($post->body))) !!}</p>
+        @if(isset($post->public_id))
+        <img class='lg:h-48 md:h-36 w-full object-cover object-center' src='{{ $post->public_id }}' alt='画像'>
+        @else
         <img class='w-full object-cover object-center my-2'
           src='https://placehold.jp/ffffff/1e1515/720x400.png?text=stepBystep' alt='画像'>
+        @endif
         <div class='flex justify-between'>
           <div class='text-sm text-gray-400'>
             {{ $post->created_at }}
