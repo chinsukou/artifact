@@ -29,7 +29,7 @@
                 <div class='flex justify-center mb-4'>
             @if (Route::has('login'))
                 @auth
-                <div class='bg-white rounded-lg text-center p-2'>
+                <div class='bg-black rounded-lg text-center p-2'>
                     <a href="{{ url('/posts') }}" class="text-sm text-white">Homeへ</a>
                 </div>
                 @else
