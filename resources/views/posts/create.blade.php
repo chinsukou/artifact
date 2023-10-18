@@ -10,7 +10,6 @@
   <div class='bg-white h-full'>
     <div class='mx-auto px-5 py-2 container'>
       <h1 class='font-semibold mb-2'>投稿作成</h1>
-      <div>※画像投稿は現在開発中です.ご迷惑をおかけします.</div>
       <div class='border-2 border-gray-200 rounded-lg'>
         @if(isset($post->public_id))
         <img class='lg:h-48 md:h-36 w-full object-cover object-center' src='{{ $post->public_id }}' alt='画像'>

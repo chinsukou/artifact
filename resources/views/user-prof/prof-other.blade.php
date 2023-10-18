@@ -34,8 +34,8 @@
         <div class='p-4 md:w-1/3'>
           <div
             class='h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden hover:tansform hover:duration-1000 hover:scale-110'>
-            @if(isset($post->public_id))
-            <img class='lg:h-48 md:h-36 w-full object-cover object-center' src='{{ $post->public_id }}' alt='画像'>
+            @if(isset($post->main_img))
+            <img class='lg:h-48 md:h-36 w-full object-cover object-center' src='{{ $post->main_img }}' alt='画像'>
             @else
             <img class='w-full object-cover object-center my-2'
               src='https://placehold.jp/ffffff/1e1515/720x400.png?text=stepBystep' alt='画像'>
