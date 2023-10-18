@@ -76,7 +76,11 @@ class PostController extends Controller
         //画像の保存
         if($image = $request->file('image')){
             //Cloudinaryに画像をアップロードしてURLを取得
-            $post->public_id = Cloudinary::upload($request->file('image')->getRealPath(),['folder' => 'images','width' => 720,'height' => 400])->getSecurePath();
+            $post->public_id = Cloudinary::upload($request->file('image')->getRealPath(),['folder' => 'images'])->getSecurePath();
+            $post->main_img = Cloudinary::upload($request->file('image')->getRealPath(),['folder' => 'images','crop' => 'crop',
+                'width' => 720,
+                'height' => 400,
+                'gravity' => 'auto', ])->getSecurePath();
         }
         $input = $request['post'];
         $post->user_id = Auth::id();

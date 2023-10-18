@@ -125,6 +125,12 @@
           {{ __('チュートリアル') }}
         </x-responsive-nav-link>--}}
         <!--Authentication-->
+        <x-responsive-nav-link :href="route('profile.edit')">
+          {{ __('設定') }}
+        </x-responsive-nav-link>
+        <x-responsive-nav-link>
+          {{ __('------------------------------------------------') }}
+        </x-responsive-nav-link>
         <form method="POST" action="{{ route('logout') }}">
           @csrf
 
