@@ -99,6 +99,44 @@ class PostController extends Controller
 
         return redirect('/posts/' . $post->id);
     }
+    // 投稿の編集
+    public function edit(Post $post,Category $category,  Difficulty $difficulty)
+    {
+        return view('posts.edit')->with([
+            'post' => $post,
+            'categories' => $category->get(),
+            'difficulties' => $difficulty->get(),
+        ]);
+    }
+    // 投稿のアップデート
+    public function update(PostRequest $request, Post $post)
+    {
+        //画像の保存
+        if($image = $request->file('image')){
+            //Cloudinaryに画像をアップロードしてURLを取得
+            $post->public_id = Cloudinary::upload($request->file('image')->getRealPath(),['folder' => 'images'])->getSecurePath();
+            $post->main_img = Cloudinary::upload($request->file('image')->getRealPath(),['folder' => 'images',
+                'crop' => 'crop',
+                'width' => 720,
+                'height' => 400,
+                'gravity' => 'auto', ])->getSecurePath();
+        }
+        $input_post = $request['post'];
+        $post->user_id = Auth::id();
+        $post->fill($input_post)->save();
+        //ハッシュタグの保存
+        $post_body = $post->body;
+        $tags = [];
+        preg_match_all('/#([a-zA-Z0-9０-９ぁ-んァ-ヶー一-龠]+)/u', $post_body, $tags);//正規表現を用いてハッシュタグを見つけて配列($tags)に入れる。
+        foreach ($tags[1] as $tag) {
+            $tag = ltrim($tag, '#'); //先頭の`#`を削除。
+            $tag = Tag::firstOrCreate(['name' => $tag]); //すでにtagテーブルにある場合はfirst、なければcreateする。
+            $post->tags()->attach($tag); //postと紐づけて保存。
+            // 投稿ににタグ付するために、attachメソッドをつかい、モデルを結びつけている中間テーブルにレコードを挿入
+        }
+
+        return redirect('/posts/' . $post->id);
+    }
     // 投稿削除
     public function delete(Post $post)
     {
