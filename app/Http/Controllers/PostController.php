@@ -102,6 +102,11 @@ class PostController extends Controller
     // 投稿削除
     public function delete(Post $post)
     {
+        // Cloudinary上の画像を削除する
+        if(isset($post->public_id)){
+            Cloudinary::destroy($post->public_id);
+            Cloudinary::destroy($post->main_img);
+        }
         $post->delete();
         return redirect('/user-prof/prof');
     }
