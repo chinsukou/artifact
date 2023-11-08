@@ -8,7 +8,8 @@
 <x-app-layout>
   <div class='bg-white h-full'>
     <div class='container px-5 mx-auto'>
-      <div class='flex border-b border-gray-500 mb-5'>
+      <div class='border-b border-gray-500 mb-5'>
+        <div class='flex'>
         <div class='text-gray-500 py-5'>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
             stroke="currentColor" class="w-24 h-24">
@@ -19,6 +20,11 @@
         <div class='py-8 ml-4'>
           <h2 class='text-lg mb-3'>名前：{{ Auth::user()->name }}</h2>
           <h3>登録日：{{ Auth::user()->created_at }}</h3>
+        </div>
+        </div>
+        <div class='flex mb-5'>
+          <div class='ml-4'>フォロー：{{ $followsCount }}</div>
+          <div class='ml-4'>フォロワー：{{ $followersCount }}</div>
         </div>
       </div>
       <!--投稿の表示-->

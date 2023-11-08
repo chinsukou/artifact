@@ -56,6 +56,9 @@ Route::get('/likes', [LikeController::class,'index'])->middleware(['auth', 'veri
 Route::middleware('auth','verified')->group(function(){
    Route::get('/user-prof/prof-other/{user}', [UserController::class,'index']); 
    Route::get('/user-prof/prof', [UserController::class,'auth'])->name('user.profile'); 
+//   フォロー
+   Route::get('/follow/{user}', [UserController::class,'follow'])->name('follow'); 
+   Route::get('/unfollow/{user}', [UserController::class,'unfollow'])->name('unfollow'); 
 });
 
 Route::middleware('auth', 'verified')->group(function () {
