@@ -61,4 +61,26 @@ class UserController extends Controller
             'followersCount' => $user->followers_count
             ]);
     }
+    public function followList(User $user)
+    {
+        $auth_user = \Auth::user();
+        $already_followed = $user->followers()->where('follower_id', $auth_user->id)->exists();
+        $user->loadCount(['follows', 'followers']);
+        return view('user-prof.follow-list')->with([
+            'user' => $user,
+            'followsCount' => $user->follows_count,
+            'followersCount' => $user->followers_count
+        ]);
+    }
+    public function followedList(User $user)
+    {
+        $auth_user = \Auth::user();
+        $already_followed = $user->followers()->where('follower_id', $auth_user->id)->exists();
+        $user->loadCount(['follows', 'followers']);
+        return view('user-prof.followed-list')->with([
+            'user' => $user,
+            'followsCount' => $user->follows_count,
+            'followersCount' => $user->followers_count
+        ]);
+    }
 }
