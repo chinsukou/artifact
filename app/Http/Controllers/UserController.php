@@ -35,7 +35,7 @@ class UserController extends Controller
         if(!$already_followed) {
             $auth_user = \Auth::user();
             auth()->user()->follows()->attach( $user->id );
-            auth()->user()->followers()->attach( $auth_user->id );
+            //auth()->user()->followers()->attach( $auth_user->id );
         }
         $user->loadCount(['follows', 'followers']);
         return view('user-prof.prof-other')->with([
@@ -51,7 +51,7 @@ class UserController extends Controller
         $already_followed = $user->followers()->where('follower_id', $auth_user->id)->exists();
         if($already_followed) {
             auth()->user()->follows()->detach( $user->id );
-            auth()->user()->followers()->detach( $auth_user->id );
+            //auth()->user()->followers()->detach( $auth_user->id );
         }
         $user->loadCount(['follows', 'followers']);
         return view('user-prof.prof-other')->with([
