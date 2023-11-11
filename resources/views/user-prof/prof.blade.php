@@ -23,8 +23,8 @@
         </div>
         </div>
         <div class='flex mb-5'>
-          <a href='/follow-list/{{ $user->id }}'><div class='ml-4'>フォロー：{{ $followsCount }}</div></a>
-          <a href='/followed-list/{{ $user->id }}'><div class='ml-4'>フォロワー：{{ $followersCount }}</div></a>
+          <a href='/follow-list/{{ Auth::user()->id }}'><div class='ml-4'>フォロー：{{ $followsCount }}</div></a>
+          <a href='/followed-list/{{ Auth::user()->id }}'><div class='ml-4'>フォロワー：{{ $followersCount }}</div></a>
         </div>
       </div>
       <!--投稿の表示-->
