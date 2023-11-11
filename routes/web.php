@@ -58,7 +58,9 @@ Route::middleware('auth','verified')->group(function(){
    Route::get('/user-prof/prof', [UserController::class,'auth'])->name('user.profile'); 
 //   フォロー
    Route::get('/follow/{user}', [UserController::class,'follow'])->name('follow'); 
-   Route::get('/unfollow/{user}', [UserController::class,'unfollow'])->name('unfollow'); 
+   Route::get('/unfollow/{user}', [UserController::class,'unfollow'])->name('unfollow');
+   Route::get('/follow-list/{user}', [UserController::class, 'followList'])->name('follow-list');
+   Route::get('/followed-list/{user}', [UserController::class, 'followedList'])->name('followed-list');
 });
 
 Route::middleware('auth', 'verified')->group(function () {

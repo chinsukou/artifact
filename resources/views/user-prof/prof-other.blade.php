@@ -23,6 +23,7 @@
         </div>
       </div>
         <div class='flex mb-5'>
+          @if(!$user->id == Auth::user()->id)
           @auth
           @if($user->followers()->where('follower_id', Auth::user()->id)->exists())
           <a href='/unfollow/{{ $user->id }}'>
@@ -34,8 +35,9 @@
           </a>
           @endif
           @endauth
-          <div class='ml-4'>フォロー：{{ $followsCount }}</div>
-          <div class='ml-4'>フォロワー：{{ $followersCount }}</div>
+          @endif
+          <a href='/follow-list/{{ $user->id }}'><div class='ml-4'>フォロー：{{ $followsCount }}</div></a>
+          <a href='/followed-list/{{ $user->id }}'><div class='ml-4'>フォロワー：{{ $followersCount }}</div></a>
         </div>
       </div>
       <!--投稿の表示-->
