@@ -27,11 +27,11 @@
             @auth
             @if($user->followers()->where('follower_id', Auth::user()->id)->exists())
             <a href='/unfollow/{{ $user->id }}'>
-            <div class='text-gray-400 ml-4'>フォロー中</div>
+            <div class='font-bold text-gray-400 ml-4'>フォロー中</div>
             </a>
             @else
             <a href='/follow/{{ $user->id }}'>
-            <div class='text-indigo-400 ml-4'>フォローする</div>
+            <div class='font-bold text-indigo-400 ml-4'>フォローする</div>
             </a>
             @endif
             @endauth
