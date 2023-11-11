@@ -23,18 +23,18 @@
         </div>
       </div>
         <div class='flex mb-5'>
-          @if(!$user->id == Auth::user()->id)
-          @auth
-          @if($user->followers()->where('follower_id', Auth::user()->id)->exists())
-          <a href='/unfollow/{{ $user->id }}'>
-          <div class='text-gray-400 ml-4'>フォロー中</div>
-          </a>
-          @else
-          <a href='/follow/{{ $user->id }}'>
-          <div class='text-indigo-400 ml-4'>フォローする</div>
-          </a>
-          @endif
-          @endauth
+          @if($user->id != Auth::user()->id)
+            @auth
+            @if($user->followers()->where('follower_id', Auth::user()->id)->exists())
+            <a href='/unfollow/{{ $user->id }}'>
+            <div class='text-gray-400 ml-4'>フォロー中</div>
+            </a>
+            @else
+            <a href='/follow/{{ $user->id }}'>
+            <div class='text-indigo-400 ml-4'>フォローする</div>
+            </a>
+            @endif
+            @endauth
           @endif
           <a href='/follow-list/{{ $user->id }}'><div class='ml-4'>フォロー：{{ $followsCount }}</div></a>
           <a href='/followed-list/{{ $user->id }}'><div class='ml-4'>フォロワー：{{ $followersCount }}</div></a>
